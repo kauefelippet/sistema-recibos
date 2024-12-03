@@ -43,7 +43,7 @@ namespace Recibo
         private void btn_ReciboDefinitivo_Click(object sender, EventArgs e)
         {
             ActiveButton(btn_ReciboDefinitivo);
-            FormShow(null); // implementar e chamar a tela de ReciboDefinitivo
+             // implementar e chamar a tela de ReciboDefinitivo
         }
 
         private void Recibo_Load(object sender, EventArgs e)
@@ -87,6 +87,12 @@ namespace Recibo
         private void lbl_Home_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_ReciboProvisorio_Click(object sender, EventArgs e)
+        {
+            ActiveButton(btn_ReciboProvisorio);
+            FormShow(new frm_EmitirReciboProvisorio());
         }
     }
 }

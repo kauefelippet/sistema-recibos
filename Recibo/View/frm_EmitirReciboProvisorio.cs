@@ -26,5 +26,40 @@ namespace Recibo.View
         {
 
         }
+
+        private void btn_EmissaoReciboProvisorio_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_Requerente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_ListaAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frm_EmitirReciboProvisorio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

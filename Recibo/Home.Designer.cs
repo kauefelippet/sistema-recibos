@@ -122,6 +122,7 @@
             btn_ReciboProvisorio.TextAlign = ContentAlignment.MiddleLeft;
             btn_ReciboProvisorio.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_ReciboProvisorio.UseVisualStyleBackColor = false;
+            btn_ReciboProvisorio.Click += btn_ReciboProvisorio_Click;
             // 
             // btn_ReciboDefinitivo
             // 
