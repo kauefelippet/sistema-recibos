@@ -29,11 +29,17 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_EmitirReciboProvisorio));
             btn_EmissaoReciboProvisorio = new Button();
             btn_Recentes = new Button();
             btn_Consulta = new Button();
             pnl_EmissaoReciboProvisorio = new Panel();
+            dgv_ReciboProvisorioAtos = new DataGridView();
+            btn_Salvar = new Button();
             btn_Adicionar = new Button();
             txtbox_Quantidade = new TextBox();
             lbl_Quantidade = new Label();
@@ -41,13 +47,13 @@
             lbl_DescricaoAto = new Label();
             txtbox_CodigoAto = new TextBox();
             lbl_CodigoAto = new Label();
-            lbx_Atos = new ListBox();
             txtbox_CPF = new TextBox();
             lbl_Cpf = new Label();
             txtbox_Requerente = new TextBox();
             lbl_Requerente = new Label();
             reciboProvisorioAtoBindingSource = new BindingSource(components);
             pnl_EmissaoReciboProvisorio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -119,6 +125,8 @@
             // 
             // pnl_EmissaoReciboProvisorio
             // 
+            pnl_EmissaoReciboProvisorio.Controls.Add(dgv_ReciboProvisorioAtos);
+            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Salvar);
             pnl_EmissaoReciboProvisorio.Controls.Add(btn_Adicionar);
             pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_Quantidade);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_Quantidade);
@@ -126,7 +134,6 @@
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_DescricaoAto);
             pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_CodigoAto);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_CodigoAto);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbx_Atos);
             pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_CPF);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_Cpf);
             pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_Requerente);
@@ -136,6 +143,75 @@
             pnl_EmissaoReciboProvisorio.Size = new Size(762, 451);
             pnl_EmissaoReciboProvisorio.TabIndex = 5;
             pnl_EmissaoReciboProvisorio.Paint += panel1_Paint;
+            // 
+            // dgv_ReciboProvisorioAtos
+            // 
+            dgv_ReciboProvisorioAtos.AllowUserToOrderColumns = true;
+            dgv_ReciboProvisorioAtos.AllowUserToResizeRows = false;
+            dgv_ReciboProvisorioAtos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_ReciboProvisorioAtos.BackgroundColor = Color.FromArgb(73, 80, 87);
+            dgv_ReciboProvisorioAtos.BorderStyle = BorderStyle.None;
+            dgv_ReciboProvisorioAtos.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgv_ReciboProvisorioAtos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle1.Font = new Font("JetBrains Mono ExtraLight", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle1.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgv_ReciboProvisorioAtos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle2.Font = new Font("JetBrains Mono ExtraLight", 9.75F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle2.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_ReciboProvisorioAtos.DefaultCellStyle = dataGridViewCellStyle2;
+            dgv_ReciboProvisorioAtos.Dock = DockStyle.Fill;
+            dgv_ReciboProvisorioAtos.EnableHeadersVisualStyles = false;
+            dgv_ReciboProvisorioAtos.Location = new Point(210, 62);
+            dgv_ReciboProvisorioAtos.Name = "dgv_ReciboProvisorioAtos";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle3.Font = new Font("JetBrains Mono ExtraLight", 9.75F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle3.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgv_ReciboProvisorioAtos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle4.Font = new Font("JetBrains Mono ExtraLight", 9.75F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle4.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgv_ReciboProvisorioAtos.Size = new Size(552, 389);
+            dgv_ReciboProvisorioAtos.TabIndex = 13;
+            dgv_ReciboProvisorioAtos.CellContentClick += dgv_ReciboProvisorioAtos_CellContentClick;
+            // 
+            // btn_Salvar
+            // 
+            btn_Salvar.BackColor = Color.FromArgb(52, 58, 64);
+            btn_Salvar.BackgroundImageLayout = ImageLayout.None;
+            btn_Salvar.Cursor = Cursors.Hand;
+            btn_Salvar.FlatAppearance.BorderSize = 0;
+            btn_Salvar.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_Salvar.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_Salvar.FlatStyle = FlatStyle.Flat;
+            btn_Salvar.Font = new Font("JetBrains Mono Light", 11F);
+            btn_Salvar.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_Salvar.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_Salvar.Location = new Point(0, 271);
+            btn_Salvar.Margin = new Padding(5);
+            btn_Salvar.Name = "btn_Salvar";
+            btn_Salvar.Size = new Size(100, 30);
+            btn_Salvar.TabIndex = 12;
+            btn_Salvar.Text = "SALVAR";
+            btn_Salvar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_Salvar.UseVisualStyleBackColor = false;
+            btn_Salvar.Click += btn_Salvar_Click;
             // 
             // btn_Adicionar
             // 
@@ -157,6 +233,7 @@
             btn_Adicionar.Text = "ADICIONAR";
             btn_Adicionar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_Adicionar.UseVisualStyleBackColor = false;
+            btn_Adicionar.Click += btn_Adicionar_Click;
             // 
             // txtbox_Quantidade
             // 
@@ -221,6 +298,7 @@
             txtbox_CodigoAto.Name = "txtbox_CodigoAto";
             txtbox_CodigoAto.Size = new Size(40, 20);
             txtbox_CodigoAto.TabIndex = 7;
+            txtbox_CodigoAto.TextChanged += txtbox_CodigoAto_TextChanged;
             // 
             // lbl_CodigoAto
             // 
@@ -233,22 +311,6 @@
             lbl_CodigoAto.TabIndex = 6;
             lbl_CodigoAto.Text = "Código do Ato";
             lbl_CodigoAto.Click += label1_Click_1;
-            // 
-            // lbx_Atos
-            // 
-            lbx_Atos.BackColor = Color.FromArgb(108, 117, 125);
-            lbx_Atos.BorderStyle = BorderStyle.None;
-            lbx_Atos.Dock = DockStyle.Top;
-            lbx_Atos.Font = new Font("JetBrains Mono ExtraLight", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbx_Atos.ForeColor = Color.FromArgb(222, 226, 230);
-            lbx_Atos.FormattingEnabled = true;
-            lbx_Atos.ItemHeight = 17;
-            lbx_Atos.Location = new Point(210, 62);
-            lbx_Atos.MultiColumn = true;
-            lbx_Atos.Name = "lbx_Atos";
-            lbx_Atos.Size = new Size(552, 391);
-            lbx_Atos.TabIndex = 5;
-            lbx_Atos.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // txtbox_CPF
             // 
@@ -289,6 +351,7 @@
             txtbox_Requerente.Name = "txtbox_Requerente";
             txtbox_Requerente.Size = new Size(762, 20);
             txtbox_Requerente.TabIndex = 1;
+            txtbox_Requerente.TextChanged += txtbox_Requerente_TextChanged;
             // 
             // lbl_Requerente
             // 
@@ -324,6 +387,7 @@
             Load += frm_EmitirReciboProvisorio_Load;
             pnl_EmissaoReciboProvisorio.ResumeLayout(false);
             pnl_EmissaoReciboProvisorio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).EndInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).EndInit();
             ResumeLayout(false);
         }
@@ -341,7 +405,6 @@
         private TextBox txtbox_Requerente;
         private BindingSource reciboProvisorioAtoBindingSource;
         private TextBox txtbox_CPF;
-        private ListBox lbx_Atos;
         private Label lbl_CodigoAto;
         private Label lbl_Quantidade;
         private TextBox textBox4;
@@ -350,5 +413,7 @@
         private TextBox txtbox_CodigoAto;
         private TextBox txtbox_Quantidade;
         private Button btn_Adicionar;
+        private Button btn_Salvar;
+        private DataGridView dgv_ReciboProvisorioAtos;
     }
 }

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Recibo.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Recibo.ViewModel
 {
     internal class ReciboProvisorioVM
     {
         private readonly ReciboProvisorio _reciboProvisorio;
+        private readonly recibos_dbContext _context;
 
         public int ReciboProvisorioID => _reciboProvisorio.Id;
 
@@ -20,9 +23,10 @@ namespace Recibo.ViewModel
         public string? Descricao { get; set; }
         public int Quantidade { get; set; }
 
-        public ReciboProvisorioVM()
+        public ReciboProvisorioVM(DbContextOptions<recibos_dbContext> options)
         {
-            _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now };
+            _context = new recibos_dbContext(options);
+            _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now, Requerente = "" };
             Atos = new ObservableCollection<ReciboProvisorioAto>(_reciboProvisorio.ReciboProvisorioAtos);
         }
 
@@ -60,6 +64,12 @@ namespace Recibo.ViewModel
                 Atos.Remove(ato);
                 _reciboProvisorio.ReciboProvisorioAtos.Remove(ato);
             }
+        }
+
+        public void SaveChanges()
+        {
+            _context.RecibosProvisorios.Add(_reciboProvisorio);
+            _context.SaveChanges();
         }
     }
 }
