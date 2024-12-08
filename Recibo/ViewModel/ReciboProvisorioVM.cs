@@ -23,10 +23,11 @@ namespace Recibo.ViewModel
         public string? Descricao { get; set; }
         public int Quantidade { get; set; }
 
-        public ReciboProvisorioVM(DbContextOptions<recibos_dbContext> options)
+        public ReciboProvisorioVM()
         {
-            _context = new recibos_dbContext(options);
-            _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now, Requerente = "" };
+            _context = new recibos_dbContext();
+            _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now };
+            Requerente = string.Empty;
             Atos = new ObservableCollection<ReciboProvisorioAto>(_reciboProvisorio.ReciboProvisorioAtos);
         }
 

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_EmitirReciboProvisorio));
             btn_EmissaoReciboProvisorio = new Button();
             btn_Recentes = new Button();
@@ -153,40 +153,41 @@
             dgv_ReciboProvisorioAtos.BorderStyle = BorderStyle.None;
             dgv_ReciboProvisorioAtos.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgv_ReciboProvisorioAtos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(108, 117, 125);
-            dataGridViewCellStyle1.Font = new Font("JetBrains Mono ExtraLight", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle1.SelectionBackColor = Color.OliveDrab;
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgv_ReciboProvisorioAtos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
-            dataGridViewCellStyle2.Font = new Font("JetBrains Mono ExtraLight", 9.75F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle2.SelectionBackColor = Color.OliveDrab;
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_ReciboProvisorioAtos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle5.Font = new Font("JetBrains Mono Light", 9.75F);
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle5.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgv_ReciboProvisorioAtos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dgv_ReciboProvisorioAtos.ColumnHeadersHeight = 20;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle6.Font = new Font("JetBrains Mono Light", 9.75F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle6.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgv_ReciboProvisorioAtos.DefaultCellStyle = dataGridViewCellStyle6;
             dgv_ReciboProvisorioAtos.Dock = DockStyle.Fill;
             dgv_ReciboProvisorioAtos.EnableHeadersVisualStyles = false;
             dgv_ReciboProvisorioAtos.Location = new Point(210, 62);
             dgv_ReciboProvisorioAtos.Name = "dgv_ReciboProvisorioAtos";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(108, 117, 125);
-            dataGridViewCellStyle3.Font = new Font("JetBrains Mono ExtraLight", 9.75F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle3.SelectionBackColor = Color.OliveDrab;
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgv_ReciboProvisorioAtos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
-            dataGridViewCellStyle4.Font = new Font("JetBrains Mono ExtraLight", 9.75F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(222, 226, 230);
-            dataGridViewCellStyle4.SelectionBackColor = Color.OliveDrab;
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(222, 226, 230);
-            dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle7.Font = new Font("JetBrains Mono Light", 9.75F);
+            dataGridViewCellStyle7.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle7.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle7.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dgv_ReciboProvisorioAtos.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle8.Font = new Font("JetBrains Mono Light", 9.75F);
+            dataGridViewCellStyle8.ForeColor = Color.FromArgb(222, 226, 230);
+            dataGridViewCellStyle8.SelectionBackColor = Color.OliveDrab;
+            dataGridViewCellStyle8.SelectionForeColor = Color.FromArgb(222, 226, 230);
+            dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle8;
             dgv_ReciboProvisorioAtos.Size = new Size(552, 389);
             dgv_ReciboProvisorioAtos.TabIndex = 13;
             dgv_ReciboProvisorioAtos.CellContentClick += dgv_ReciboProvisorioAtos_CellContentClick;
@@ -207,7 +208,7 @@
             btn_Salvar.Margin = new Padding(5);
             btn_Salvar.Name = "btn_Salvar";
             btn_Salvar.Size = new Size(100, 30);
-            btn_Salvar.TabIndex = 12;
+            btn_Salvar.TabIndex = 11;
             btn_Salvar.Text = "SALVAR";
             btn_Salvar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_Salvar.UseVisualStyleBackColor = false;
@@ -229,7 +230,7 @@
             btn_Adicionar.Margin = new Padding(5);
             btn_Adicionar.Name = "btn_Adicionar";
             btn_Adicionar.Size = new Size(100, 30);
-            btn_Adicionar.TabIndex = 6;
+            btn_Adicionar.TabIndex = 10;
             btn_Adicionar.Text = "ADICIONAR";
             btn_Adicionar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_Adicionar.UseVisualStyleBackColor = false;
@@ -241,13 +242,13 @@
             txtbox_Quantidade.BackColor = Color.FromArgb(108, 117, 125);
             txtbox_Quantidade.BorderStyle = BorderStyle.None;
             txtbox_Quantidade.Cursor = Cursors.IBeam;
-            txtbox_Quantidade.Font = new Font("JetBrains Mono ExtraLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtbox_Quantidade.Font = new Font("JetBrains Mono Light", 11F);
             txtbox_Quantidade.ForeColor = Color.FromArgb(222, 226, 230);
             txtbox_Quantidade.Location = new Point(0, 203);
             txtbox_Quantidade.MaxLength = 3;
             txtbox_Quantidade.Name = "txtbox_Quantidade";
             txtbox_Quantidade.Size = new Size(40, 20);
-            txtbox_Quantidade.TabIndex = 11;
+            txtbox_Quantidade.TabIndex = 9;
             // 
             // lbl_Quantidade
             // 
@@ -257,7 +258,7 @@
             lbl_Quantidade.Location = new Point(0, 179);
             lbl_Quantidade.Name = "lbl_Quantidade";
             lbl_Quantidade.Size = new Size(110, 21);
-            lbl_Quantidade.TabIndex = 10;
+            lbl_Quantidade.TabIndex = 8;
             lbl_Quantidade.Text = "Quantidade";
             // 
             // txtbox_Descricao
@@ -266,13 +267,13 @@
             txtbox_Descricao.BackColor = Color.FromArgb(108, 117, 125);
             txtbox_Descricao.BorderStyle = BorderStyle.None;
             txtbox_Descricao.Cursor = Cursors.IBeam;
-            txtbox_Descricao.Font = new Font("JetBrains Mono ExtraLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtbox_Descricao.Font = new Font("JetBrains Mono Light", 11F);
             txtbox_Descricao.ForeColor = Color.FromArgb(222, 226, 230);
             txtbox_Descricao.Location = new Point(0, 156);
             txtbox_Descricao.MaxLength = 127;
             txtbox_Descricao.Name = "txtbox_Descricao";
             txtbox_Descricao.Size = new Size(210, 20);
-            txtbox_Descricao.TabIndex = 9;
+            txtbox_Descricao.TabIndex = 7;
             // 
             // lbl_DescricaoAto
             // 
@@ -282,7 +283,7 @@
             lbl_DescricaoAto.Location = new Point(0, 132);
             lbl_DescricaoAto.Name = "lbl_DescricaoAto";
             lbl_DescricaoAto.Size = new Size(100, 21);
-            lbl_DescricaoAto.TabIndex = 8;
+            lbl_DescricaoAto.TabIndex = 6;
             lbl_DescricaoAto.Text = "Descrição";
             // 
             // txtbox_CodigoAto
@@ -291,13 +292,13 @@
             txtbox_CodigoAto.BackColor = Color.FromArgb(108, 117, 125);
             txtbox_CodigoAto.BorderStyle = BorderStyle.None;
             txtbox_CodigoAto.Cursor = Cursors.IBeam;
-            txtbox_CodigoAto.Font = new Font("JetBrains Mono ExtraLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtbox_CodigoAto.Font = new Font("JetBrains Mono Light", 11F);
             txtbox_CodigoAto.ForeColor = Color.FromArgb(222, 226, 230);
             txtbox_CodigoAto.Location = new Point(0, 109);
             txtbox_CodigoAto.MaxLength = 3;
             txtbox_CodigoAto.Name = "txtbox_CodigoAto";
             txtbox_CodigoAto.Size = new Size(40, 20);
-            txtbox_CodigoAto.TabIndex = 7;
+            txtbox_CodigoAto.TabIndex = 5;
             txtbox_CodigoAto.TextChanged += txtbox_CodigoAto_TextChanged;
             // 
             // lbl_CodigoAto
@@ -308,7 +309,7 @@
             lbl_CodigoAto.Location = new Point(0, 85);
             lbl_CodigoAto.Name = "lbl_CodigoAto";
             lbl_CodigoAto.Size = new Size(140, 21);
-            lbl_CodigoAto.TabIndex = 6;
+            lbl_CodigoAto.TabIndex = 4;
             lbl_CodigoAto.Text = "Código do Ato";
             lbl_CodigoAto.Click += label1_Click_1;
             // 
@@ -319,9 +320,10 @@
             txtbox_CPF.BorderStyle = BorderStyle.None;
             txtbox_CPF.Cursor = Cursors.IBeam;
             txtbox_CPF.Dock = DockStyle.Left;
-            txtbox_CPF.Font = new Font("JetBrains Mono ExtraLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtbox_CPF.Font = new Font("JetBrains Mono Light", 11F);
             txtbox_CPF.ForeColor = Color.FromArgb(222, 226, 230);
             txtbox_CPF.Location = new Point(0, 62);
+            txtbox_CPF.MaxLength = 11;
             txtbox_CPF.Name = "txtbox_CPF";
             txtbox_CPF.Size = new Size(210, 20);
             txtbox_CPF.TabIndex = 3;
@@ -343,11 +345,13 @@
             txtbox_Requerente.AcceptsTab = true;
             txtbox_Requerente.BackColor = Color.FromArgb(108, 117, 125);
             txtbox_Requerente.BorderStyle = BorderStyle.None;
+            txtbox_Requerente.CharacterCasing = CharacterCasing.Upper;
             txtbox_Requerente.Cursor = Cursors.IBeam;
             txtbox_Requerente.Dock = DockStyle.Top;
-            txtbox_Requerente.Font = new Font("JetBrains Mono ExtraLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtbox_Requerente.Font = new Font("JetBrains Mono Light", 11F);
             txtbox_Requerente.ForeColor = Color.FromArgb(222, 226, 230);
             txtbox_Requerente.Location = new Point(0, 21);
+            txtbox_Requerente.MaxLength = 127;
             txtbox_Requerente.Name = "txtbox_Requerente";
             txtbox_Requerente.Size = new Size(762, 20);
             txtbox_Requerente.TabIndex = 1;
@@ -399,15 +403,12 @@
         private Button btn_Consulta;
         private Panel pnl_EmissaoReciboProvisorio;
         private Label lbl_Requerente;
-        private TextBox textBox1;
-        private TextBox textBox2;
         private Label lbl_Cpf;
         private TextBox txtbox_Requerente;
         private BindingSource reciboProvisorioAtoBindingSource;
         private TextBox txtbox_CPF;
         private Label lbl_CodigoAto;
         private Label lbl_Quantidade;
-        private TextBox textBox4;
         private Label lbl_DescricaoAto;
         private TextBox txtbox_Descricao;
         private TextBox txtbox_CodigoAto;

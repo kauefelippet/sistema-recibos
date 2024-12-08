@@ -47,7 +47,7 @@
             // 
             // pnl_Principal
             // 
-            pnl_Principal.BackColor = Color.FromArgb(173, 181, 189);
+            pnl_Principal.BackColor = Color.FromArgb(108, 117, 125);
             pnl_Principal.Controls.Add(btn_Sair);
             pnl_Principal.Controls.Add(btn_Atos);
             pnl_Principal.Controls.Add(btn_ReciboProvisorio);
@@ -171,6 +171,7 @@
             // 
             // pnl_Form
             // 
+            pnl_Form.BackColor = Color.FromArgb(173, 181, 189);
             pnl_Form.Controls.Add(label1);
             pnl_Form.Controls.Add(lbl_Home);
             pnl_Form.Dock = DockStyle.Fill;

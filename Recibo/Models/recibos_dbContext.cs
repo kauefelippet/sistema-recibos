@@ -8,8 +8,8 @@ namespace Recibo.Models;
 
 public partial class recibos_dbContext : DbContext
 {
-    public recibos_dbContext(DbContextOptions<recibos_dbContext> options)
-        : base(options)
+    public recibos_dbContext()
+        : base()
     {
     }
 
