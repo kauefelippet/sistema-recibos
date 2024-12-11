@@ -1,4 +1,5 @@
-﻿using Recibo.ViewModel;
+﻿using Recibo.Models;
+using Recibo.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -105,17 +106,21 @@ namespace Recibo.View
         {
             try
             {
-                _reciboProvisorioVM.NomeAto = txtbox_CodigoAto.Text;
-                _reciboProvisorioVM.Descricao = txtbox_Descricao.Text;
-                _reciboProvisorioVM.Quantidade = Convert.ToInt32(txtbox_Quantidade.Text);
+                var novoAto = new ReciboProvisorioAto
+                {
+                    Descricao = txtbox_Descricao.Text,
+                    Quantidade = Convert.ToInt32(txtbox_Quantidade.Text),
+                    Ato = new Ato { Descricao = txtbox_CodigoAto.Text }
+                };
 
-                _reciboProvisorioVM.AddAto();
+                _reciboProvisorioVM.Atos.Add(novoAto);
 
                 txtbox_CodigoAto.Clear();
                 txtbox_Descricao.Clear();
                 txtbox_Quantidade.Clear();
 
-                dgv_ReciboProvisorioAtos.Refresh();
+                dgv_ReciboProvisorioAtos.DataSource = null;
+                dgv_ReciboProvisorioAtos.DataSource = _reciboProvisorioVM.Atos;
             }
             catch (Exception ex)
             {

@@ -2,20 +2,37 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Recibo.Models;
 
+[PrimaryKey("ReciboProvisorioId", "AtoId")]
+[Table("recibo_provisorio_atos")]
+[Index("AtoId", Name = "ato_id")]
 public partial class ReciboProvisorioAto
 {
+    [Key]
+    [Column("recibo_provisorio_id")]
     public int ReciboProvisorioId { get; set; }
 
+    [Key]
+    [Column("ato_id")]
     public int AtoId { get; set; }
 
+    [Column("descricao")]
+    [StringLength(127)]
     public string Descricao { get; set; }
 
+    [Column("quantidade")]
     public int Quantidade { get; set; }
 
+    [ForeignKey("AtoId")]
+    [InverseProperty("ReciboProvisorioAtos")]
     public virtual Ato Ato { get; set; }
 
+    [ForeignKey("ReciboProvisorioId")]
+    [InverseProperty("ReciboProvisorioAtos")]
     public virtual ReciboProvisorio ReciboProvisorio { get; set; }
 }

@@ -3,13 +3,18 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace Recibo.Models;
 
 public partial class recibos_dbContext : DbContext
 {
     public recibos_dbContext()
-        : base()
+    {
+    }
+
+    public recibos_dbContext(DbContextOptions<recibos_dbContext> options)
+        : base(options)
     {
     }
 
@@ -23,6 +28,10 @@ public partial class recibos_dbContext : DbContext
 
     public virtual DbSet<ReciboProvisorio> RecibosProvisorios { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySql("server=localhost;port=3307;database=recibos_db;uid=root;pwd=secret", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.39-mysql"));
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
@@ -33,53 +42,16 @@ public partial class recibos_dbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("atos");
-
-            entity.HasIndex(e => e.Nome, "nome").IsUnique();
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CustasIpesp)
-                .HasPrecision(10, 2)
-                .HasColumnName("custas_ipesp");
-            entity.Property(e => e.CustasIss)
-                .HasPrecision(10, 2)
-                .HasColumnName("custas_iss");
-            entity.Property(e => e.CustasOficial)
-                .HasPrecision(10, 2)
-                .HasColumnName("custas_oficial");
-            entity.Property(e => e.Descricao)
-                .IsRequired()
-                .HasMaxLength(63)
-                .HasColumnName("descricao");
-            entity.Property(e => e.Nome)
-                .IsRequired()
-                .HasMaxLength(3)
-                .IsFixedLength()
-                .HasColumnName("nome");
+            entity.Property(e => e.Nome).IsFixedLength();
         });
 
         modelBuilder.Entity<ReciboDefinitivo>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("recibos");
+            entity.Property(e => e.Data).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            entity.HasIndex(e => e.ReciboProvisorioId, "recibo_provisorio_id");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Data)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP")
-                .HasColumnType("timestamp")
-                .HasColumnName("data");
-            entity.Property(e => e.ReciboProvisorioId).HasColumnName("recibo_provisorio_id");
-            entity.Property(e => e.Requerente)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("requerente");
-
-            entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.Recibos)
-                .HasForeignKey(d => d.ReciboProvisorioId)
-                .HasConstraintName("recibos_ibfk_1");
+            entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.Recibos).HasConstraintName("recibos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboAto>(entity =>
@@ -88,24 +60,9 @@ public partial class recibos_dbContext : DbContext
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("recibo_atos");
+            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboAtos).HasConstraintName("recibo_atos_ibfk_2");
 
-            entity.HasIndex(e => e.AtoId, "ato_id");
-
-            entity.Property(e => e.ReciboId).HasColumnName("recibo_id");
-            entity.Property(e => e.AtoId).HasColumnName("ato_id");
-            entity.Property(e => e.Descricao)
-                .HasMaxLength(127)
-                .HasColumnName("descricao");
-            entity.Property(e => e.Quantidade).HasColumnName("quantidade");
-
-            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboAtos)
-                .HasForeignKey(d => d.AtoId)
-                .HasConstraintName("recibo_atos_ibfk_2");
-
-            entity.HasOne(d => d.Recibo).WithMany(p => p.ReciboAtos)
-                .HasForeignKey(d => d.ReciboId)
-                .HasConstraintName("recibo_atos_ibfk_1");
+            entity.HasOne(d => d.Recibo).WithMany(p => p.ReciboAtos).HasConstraintName("recibo_atos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboProvisorioAto>(entity =>
@@ -114,41 +71,16 @@ public partial class recibos_dbContext : DbContext
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("recibo_provisorio_atos");
+            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboProvisorioAtos).HasConstraintName("recibo_provisorio_atos_ibfk_2");
 
-            entity.HasIndex(e => e.AtoId, "ato_id");
-
-            entity.Property(e => e.ReciboProvisorioId).HasColumnName("recibo_provisorio_id");
-            entity.Property(e => e.AtoId).HasColumnName("ato_id");
-            entity.Property(e => e.Descricao)
-                .HasMaxLength(127)
-                .HasColumnName("descricao");
-            entity.Property(e => e.Quantidade).HasColumnName("quantidade");
-
-            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboProvisorioAtos)
-                .HasForeignKey(d => d.AtoId)
-                .HasConstraintName("recibo_provisorio_atos_ibfk_2");
-
-            entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.ReciboProvisorioAtos)
-                .HasForeignKey(d => d.ReciboProvisorioId)
-                .HasConstraintName("recibo_provisorio_atos_ibfk_1");
+            entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.ReciboProvisorioAtos).HasConstraintName("recibo_provisorio_atos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboProvisorio>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("recibos_provisorios");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Data)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP")
-                .HasColumnType("timestamp")
-                .HasColumnName("data");
-            entity.Property(e => e.Requerente)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("requerente");
+            entity.Property(e => e.Data).HasDefaultValueSql("CURRENT_TIMESTAMP");
         });
 
         OnModelCreatingPartial(modelBuilder);

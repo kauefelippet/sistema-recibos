@@ -101,6 +101,7 @@
             btn_Atos.TextAlign = ContentAlignment.MiddleLeft;
             btn_Atos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_Atos.UseVisualStyleBackColor = false;
+            btn_Atos.Click += btn_Atos_Click;
             // 
             // btn_ReciboProvisorio
             // 
@@ -171,7 +172,7 @@
             // 
             // pnl_Form
             // 
-            pnl_Form.BackColor = Color.FromArgb(173, 181, 189);
+            pnl_Form.BackColor = Color.FromArgb(108, 117, 125);
             pnl_Form.Controls.Add(label1);
             pnl_Form.Controls.Add(lbl_Home);
             pnl_Form.Dock = DockStyle.Fill;

@@ -17,7 +17,7 @@ namespace Recibo.ViewModel
 
         public DateTime? Data => _reciboProvisorio.Data;
 
-        public ObservableCollection<ReciboProvisorioAto> Atos { get; }
+        public ObservableCollection<ReciboProvisorioAto> Atos { get; } = new ObservableCollection<ReciboProvisorioAto>();
 
         public string? NomeAto { get; set; }
         public string? Descricao { get; set; }
@@ -28,7 +28,6 @@ namespace Recibo.ViewModel
             _context = new recibos_dbContext();
             _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now };
             Requerente = string.Empty;
-            Atos = new ObservableCollection<ReciboProvisorioAto>(_reciboProvisorio.ReciboProvisorioAtos);
         }
 
         /// <summary>
