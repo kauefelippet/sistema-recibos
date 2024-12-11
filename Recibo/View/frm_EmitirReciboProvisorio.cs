@@ -15,6 +15,7 @@ namespace Recibo.View
     public partial class frm_EmitirReciboProvisorio : Form
     {
         private ReciboProvisorioVM _reciboProvisorioVM;
+        private recibos_dbContext _context = new recibos_dbContext();
         public frm_EmitirReciboProvisorio()
         {
             InitializeComponent();
@@ -31,10 +32,10 @@ namespace Recibo.View
             dgv_ReciboProvisorioAtos.AutoGenerateColumns = false;
             dgv_ReciboProvisorioAtos.Columns.Clear();
 
-            // Add columns for Descricao of Ato, Descricao and Quantidade of ReciboProvisorioAto
+            // Add columns for Ato, Descricao, Quantidade and Total of ReciboProvisorioAto
             dgv_ReciboProvisorioAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "Ato.Descricao",
+                DataPropertyName = "AtoDescricao",
                 HeaderText = "Ato",
                 ReadOnly = true
             });
@@ -50,54 +51,15 @@ namespace Recibo.View
                 DataPropertyName = "Quantidade",
                 HeaderText = "Quantidade"
             });
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btn_EmissaoReciboProvisorio_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_Requerente_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgv_ListaAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
+            dgv_ReciboProvisorioAtos.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Total",
+                HeaderText = "Total"
+            });
         }
 
         private void frm_EmitirReciboProvisorio_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtbox_Requerente_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -106,11 +68,12 @@ namespace Recibo.View
         {
             try
             {
+                var ato = _context.Atos.FirstOrDefault(a => a.Codigo == txtbox_CodigoAto.Text) ?? throw new Exception("O código do Ato informado não existe.");
                 var novoAto = new ReciboProvisorioAto
                 {
                     Descricao = txtbox_Descricao.Text,
                     Quantidade = Convert.ToInt32(txtbox_Quantidade.Text),
-                    Ato = new Ato { Descricao = txtbox_CodigoAto.Text }
+                    Ato = ato
                 };
 
                 _reciboProvisorioVM.Atos.Add(novoAto);
@@ -119,6 +82,7 @@ namespace Recibo.View
                 txtbox_Descricao.Clear();
                 txtbox_Quantidade.Clear();
 
+                // Refresh the DataGridView
                 dgv_ReciboProvisorioAtos.DataSource = null;
                 dgv_ReciboProvisorioAtos.DataSource = _reciboProvisorioVM.Atos;
             }
@@ -128,19 +92,9 @@ namespace Recibo.View
             }
         }
 
-        private void txtbox_CodigoAto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_Salvar_Click(object sender, EventArgs e)
         {
             _reciboProvisorioVM.SaveChanges();
-        }
-
-        private void dgv_ReciboProvisorioAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

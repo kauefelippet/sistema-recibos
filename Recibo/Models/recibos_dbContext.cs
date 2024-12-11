@@ -42,7 +42,7 @@ public partial class recibos_dbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.Property(e => e.Nome).IsFixedLength();
+            entity.Property(e => e.Codigo).IsFixedLength();
         });
 
         modelBuilder.Entity<ReciboDefinitivo>(entity =>
@@ -56,24 +56,28 @@ public partial class recibos_dbContext : DbContext
 
         modelBuilder.Entity<ReciboAto>(entity =>
         {
-            entity.HasKey(e => new { e.ReciboId, e.AtoId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboAtos).HasConstraintName("recibo_atos_ibfk_2");
+            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboAtos)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("recibo_atos_ibfk_2");
 
-            entity.HasOne(d => d.Recibo).WithMany(p => p.ReciboAtos).HasConstraintName("recibo_atos_ibfk_1");
+            entity.HasOne(d => d.Recibo).WithMany(p => p.ReciboAtos)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("recibo_atos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboProvisorioAto>(entity =>
         {
-            entity.HasKey(e => new { e.ReciboProvisorioId, e.AtoId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboProvisorioAtos).HasConstraintName("recibo_provisorio_atos_ibfk_2");
+            entity.HasOne(d => d.Ato).WithMany(p => p.ReciboProvisorioAtos)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("recibo_provisorio_atos_ibfk_2");
 
-            entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.ReciboProvisorioAtos).HasConstraintName("recibo_provisorio_atos_ibfk_1");
+            entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.ReciboProvisorioAtos)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("recibo_provisorio_atos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboProvisorio>(entity =>

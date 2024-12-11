@@ -15,7 +15,7 @@ namespace Recibo.ViewModel
 
         public ObservableCollection<ReciboAto> Atos { get; }
 
-        public string? NomeAto { get; set; }
+        public string? CodigoAto { get; set; }
         public string? Descricao { get; set; }
         public int Quantidade { get; set; }
 
@@ -32,7 +32,7 @@ namespace Recibo.ViewModel
         /// <exception cref="ArgumentException">Lançado quando o Ato não é informado ou quando a quantidade não é maior que 0</exception>
         public void AddAto()
         {
-            if (string.IsNullOrEmpty(NomeAto))
+            if (string.IsNullOrEmpty(CodigoAto))
             {
                 throw new ArgumentException("Ato não informado");
             }
@@ -41,7 +41,7 @@ namespace Recibo.ViewModel
                 throw new ArgumentException("Quantidade deve ser maior que zero");
             }
 
-            var ato = new Ato { Nome = NomeAto };
+            var ato = new Ato { Codigo = CodigoAto };
             var reciboAto = new ReciboAto
             {
                 Ato = ato,

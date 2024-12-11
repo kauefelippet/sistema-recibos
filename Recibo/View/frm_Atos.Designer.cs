@@ -75,7 +75,6 @@
             pnl_EmissaoReciboProvisorio.Name = "pnl_EmissaoReciboProvisorio";
             pnl_EmissaoReciboProvisorio.Size = new Size(762, 502);
             pnl_EmissaoReciboProvisorio.TabIndex = 11;
-            pnl_EmissaoReciboProvisorio.Paint += panel1_Paint;
             // 
             // txtbox_CustasOficial
             // 
@@ -131,9 +130,8 @@
             // 
             dgv_Atos.AllowUserToAddRows = false;
             dgv_Atos.AllowUserToDeleteRows = false;
-            dgv_Atos.AllowUserToOrderColumns = true;
             dgv_Atos.AllowUserToResizeRows = false;
-            dgv_Atos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_Atos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv_Atos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_Atos.BackgroundColor = Color.FromArgb(73, 80, 87);
             dgv_Atos.BorderStyle = BorderStyle.None;
@@ -148,6 +146,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgv_Atos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgv_Atos.ColumnHeadersHeight = 20;
+            dgv_Atos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle2.Font = new Font("JetBrains Mono Light", 9F);
@@ -169,6 +168,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgv_Atos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgv_Atos.RowHeadersVisible = false;
+            dgv_Atos.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle4.Font = new Font("JetBrains Mono Light", 9F);
             dataGridViewCellStyle4.ForeColor = Color.FromArgb(222, 226, 230);
@@ -177,7 +177,6 @@
             dgv_Atos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgv_Atos.Size = new Size(552, 496);
             dgv_Atos.TabIndex = 13;
-            dgv_Atos.CellContentClick += dgv_ReciboProvisorioAtos_CellContentClick;
             // 
             // btn_Excluir
             // 
@@ -286,7 +285,6 @@
             txtbox_CodigoAto.Name = "txtbox_CodigoAto";
             txtbox_CodigoAto.Size = new Size(40, 20);
             txtbox_CodigoAto.TabIndex = 2;
-            txtbox_CodigoAto.TextChanged += txtbox_CodigoAto_TextChanged;
             // 
             // lbl_CodigoAto
             // 
@@ -310,7 +308,6 @@
             lbl_Atos.Size = new Size(50, 21);
             lbl_Atos.TabIndex = 0;
             lbl_Atos.Text = "Atos";
-            lbl_Atos.Click += lbl_Requerente_Click;
             // 
             // reciboProvisorioAtoBindingSource
             // 

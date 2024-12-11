@@ -8,18 +8,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Recibo.Models;
 
-[PrimaryKey("ReciboId", "AtoId")]
 [Table("recibo_atos")]
 [Index("AtoId", Name = "ato_id")]
+[Index("ReciboId", Name = "recibo_id")]
 public partial class ReciboAto
 {
     [Key]
-    [Column("recibo_id")]
-    public int ReciboId { get; set; }
+    [Column("id")]
+    public int Id { get; set; }
 
-    [Key]
+    [Column("recibo_id")]
+    public int? ReciboId { get; set; }
+
     [Column("ato_id")]
-    public int AtoId { get; set; }
+    public int? AtoId { get; set; }
 
     [Column("descricao")]
     [StringLength(127)]

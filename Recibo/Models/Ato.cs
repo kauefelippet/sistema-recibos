@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Recibo.Models;
 
 [Table("atos")]
-[Index("Nome", Name = "nome", IsUnique = true)]
+[Index("Codigo", Name = "codigo", IsUnique = true)]
 public partial class Ato
 {
     [Key]
@@ -17,9 +17,9 @@ public partial class Ato
     public int Id { get; set; }
 
     [Required]
-    [Column("nome")]
+    [Column("codigo")]
     [StringLength(3)]
-    public string Nome { get; set; }
+    public string Codigo { get; set; }
 
     [Column("custas_oficial")]
     [Precision(10, 2)]
@@ -37,11 +37,11 @@ public partial class Ato
     [Column("descricao")]
     [StringLength(63)]
     public string Descricao { get; set; }
-
-    [NotMapped]
+ 
+   [NotMapped]
     public decimal Total => CustasIpesp + CustasIss + CustasOficial;
 
-    [InverseProperty("Ato")]
+[InverseProperty("Ato")]
     public virtual ICollection<ReciboAto> ReciboAtos { get; set; } = new List<ReciboAto>();
 
     [InverseProperty("Ato")]

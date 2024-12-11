@@ -41,7 +41,7 @@ namespace Recibo.View
             // Add columns for Descricao of Ato, Descricao and Quantidade of ReciboProvisorioAto
             dgv_Atos.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "Nome",
+                DataPropertyName = "Codigo",
                 HeaderText = "Código",
                 ReadOnly = true
             });
@@ -103,54 +103,7 @@ namespace Recibo.View
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btn_EmissaoReciboProvisorio_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_Requerente_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgv_ListaAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void frm_Atos_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtbox_Requerente_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void txtbox_CodigoAto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgv_ReciboProvisorioAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

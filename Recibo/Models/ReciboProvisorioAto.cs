@@ -8,18 +8,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Recibo.Models;
 
-[PrimaryKey("ReciboProvisorioId", "AtoId")]
 [Table("recibo_provisorio_atos")]
 [Index("AtoId", Name = "ato_id")]
+[Index("ReciboProvisorioId", Name = "recibo_provisorio_id")]
 public partial class ReciboProvisorioAto
 {
     [Key]
-    [Column("recibo_provisorio_id")]
-    public int ReciboProvisorioId { get; set; }
+    [Column("id")]
+    public int Id { get; set; }
 
-    [Key]
+    [Column("recibo_provisorio_id")]
+    public int? ReciboProvisorioId { get; set; }
+
     [Column("ato_id")]
-    public int AtoId { get; set; }
+    public int? AtoId { get; set; }
 
     [Column("descricao")]
     [StringLength(127)]
@@ -35,4 +37,10 @@ public partial class ReciboProvisorioAto
     [ForeignKey("ReciboProvisorioId")]
     [InverseProperty("ReciboProvisorioAtos")]
     public virtual ReciboProvisorio ReciboProvisorio { get; set; }
+
+    [NotMapped]
+    public decimal Total => Ato?.Total * Quantidade ?? 0;
+
+    [NotMapped]
+    public string AtoDescricao => Ato?.Descricao;
 }

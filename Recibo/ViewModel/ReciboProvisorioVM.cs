@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
 using Recibo.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Recibo.ViewModel
 {
@@ -19,7 +17,7 @@ namespace Recibo.ViewModel
 
         public ObservableCollection<ReciboProvisorioAto> Atos { get; } = new ObservableCollection<ReciboProvisorioAto>();
 
-        public string? NomeAto { get; set; }
+        public string? CodigoAto { get; set; }
         public string? Descricao { get; set; }
         public int Quantidade { get; set; }
 
@@ -36,7 +34,7 @@ namespace Recibo.ViewModel
         /// <exception cref="ArgumentException">Lançado quando o Ato não é informado ou quando a quantidade não é maior que 0</exception>
         public void AddAto()
         {
-            if (string.IsNullOrEmpty(NomeAto))
+            if (string.IsNullOrEmpty(CodigoAto))
             {
                 throw new ArgumentException("Ato não informado");
             }
@@ -45,7 +43,7 @@ namespace Recibo.ViewModel
                 throw new ArgumentException("Quantidade deve ser maior que zero");
             }
 
-            var ato = new Ato { Nome = NomeAto };
+            var ato = _context.Atos.FirstOrDefault(a => a.Codigo == CodigoAto) ?? throw new ArgumentException("Ato inexistente");
             var reciboProvisorioAto = new ReciboProvisorioAto
             {
                 Ato = ato,
@@ -63,13 +61,29 @@ namespace Recibo.ViewModel
             {
                 Atos.Remove(ato);
                 _reciboProvisorio.ReciboProvisorioAtos.Remove(ato);
+                _context.ReciboProvisorioAtos.Remove(ato);
+                _context.SaveChanges();
             }
         }
 
         public void SaveChanges()
         {
             _context.RecibosProvisorios.Add(_reciboProvisorio);
+            foreach (var ato in Atos)
+            {
+                _context.ReciboProvisorioAtos.Add(ato);
+            }
             _context.SaveChanges();
+        }
+
+        public ObservableCollection<ReciboProvisorioAto> GetAtosByReciboProvisorioId(int reciboProvisorioId)
+        {
+            var atos = _context.ReciboProvisorioAtos
+                               .Where(rpa => rpa.ReciboProvisorioId == reciboProvisorioId)
+                               .Include(rpa => rpa.Ato)
+                               .ToList();
+
+            return new ObservableCollection<ReciboProvisorioAto>(atos);
         }
     }
 }
