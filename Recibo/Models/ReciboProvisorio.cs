@@ -23,6 +23,10 @@ public partial class ReciboProvisorio
     [StringLength(255)]
     public string Requerente { get; set; }
 
+    [Column("cpf")]
+    [StringLength(11)]
+    public string Cpf { get; set; }
+
     [InverseProperty("ReciboProvisorio")]
     public virtual ICollection<ReciboProvisorioAto> ReciboProvisorioAtos { get; set; } = new List<ReciboProvisorioAto>();
 

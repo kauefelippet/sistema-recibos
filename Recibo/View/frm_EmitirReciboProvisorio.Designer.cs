@@ -52,6 +52,7 @@
             txtbox_Requerente = new TextBox();
             lbl_Requerente = new Label();
             reciboProvisorioAtoBindingSource = new BindingSource(components);
+            lbl_IdRecibo = new Label();
             pnl_EmissaoReciboProvisorio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).BeginInit();
@@ -375,12 +376,24 @@
             // 
             reciboProvisorioAtoBindingSource.DataSource = typeof(Models.ReciboProvisorioAto);
             // 
+            // lbl_IdRecibo
+            // 
+            lbl_IdRecibo.AutoSize = true;
+            lbl_IdRecibo.Font = new Font("JetBrains Mono Light", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_IdRecibo.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_IdRecibo.Location = new Point(590, 22);
+            lbl_IdRecibo.Name = "lbl_IdRecibo";
+            lbl_IdRecibo.Size = new Size(100, 21);
+            lbl_IdRecibo.TabIndex = 14;
+            lbl_IdRecibo.Text = "Recibo nº";
+            // 
             // frm_EmitirReciboProvisorio
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(73, 80, 87);
             ClientSize = new Size(784, 526);
+            Controls.Add(lbl_IdRecibo);
             Controls.Add(pnl_EmissaoReciboProvisorio);
             Controls.Add(btn_Consulta);
             Controls.Add(btn_Recentes);
@@ -395,6 +408,7 @@
             ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).EndInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -417,5 +431,6 @@
         private Button btn_Adicionar;
         private Button btn_Salvar;
         private DataGridView dgv_ReciboProvisorioAtos;
+        private Label lbl_IdRecibo;
     }
 }

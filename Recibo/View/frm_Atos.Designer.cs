@@ -334,9 +334,6 @@
 
         #endregion
 
-        private Button btn_EmissaoReciboProvisorio;
-        private Button btn_Recentes;
-        private Button btn_Consulta;
         private Panel pnl_EmissaoReciboProvisorio;
         private Label lbl_Atos;
         private BindingSource reciboProvisorioAtoBindingSource;

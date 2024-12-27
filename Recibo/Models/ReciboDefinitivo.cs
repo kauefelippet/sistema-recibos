@@ -27,6 +27,10 @@ public partial class ReciboDefinitivo
     [Column("recibo_provisorio_id")]
     public int? ReciboProvisorioId { get; set; }
 
+    [Column("cpf")]
+    [StringLength(11)]
+    public string Cpf { get; set; }
+
     [InverseProperty("Recibo")]
     public virtual ICollection<ReciboAto> ReciboAtos { get; set; } = new List<ReciboAto>();
 

@@ -32,6 +32,11 @@ namespace Recibo.ViewModel
 
         public void CreateAto(string codigo, string nome, decimal custasIpesp, decimal custasIss, decimal custasOficial)
         {
+            if (_context.Atos.FirstOrDefault(a => a.Codigo == codigo) != null)
+            {
+                throw new Exception("Já existe um ato com o código informado.");
+            }
+
             this.Codigo = codigo ?? throw new Exception("O código do ato deve ser informado.");
             this.Nome = nome ?? throw new Exception("A descrição do ato deve ser informada.");
             this.CustasIpesp = custasIpesp;

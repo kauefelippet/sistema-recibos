@@ -62,7 +62,7 @@ namespace Recibo.View
 
         private void frm_EmitirReciboProvisorio_Load(object sender, EventArgs e)
         {
-
+            lbl_IdRecibo.Text = "Recibo nº " + _reciboProvisorioVM.ReciboProvisorioID.ToString();
         }
 
         private void btn_Adicionar_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Recibo.View
             {
                 if (string.IsNullOrEmpty(txtbox_CodigoAto.Text))
                     throw new Exception("O código do Ato não foi informado.");
-                if (Convert.ToInt32(txtbox_Quantidade.Text) <= 0)
+                if (string.IsNullOrEmpty(txtbox_Quantidade.Text))
                     throw new Exception("A quantidade deve ser maior que zero.");
 
                 var ato = _context.Atos.FirstOrDefault(a => a.Codigo == txtbox_CodigoAto.Text) ?? throw new Exception("O código do Ato informado não existe.");
@@ -99,7 +99,17 @@ namespace Recibo.View
 
         private void btn_Salvar_Click(object sender, EventArgs e)
         {
-            _reciboProvisorioVM.SaveChanges();
+            try
+            {
+                _reciboProvisorioVM.Requerente = txtbox_Requerente.Text;
+                _reciboProvisorioVM.Cpf = txtbox_CPF.Text;
+
+                _reciboProvisorioVM.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtbox_Requerente_TextChanged(object sender, EventArgs e)
@@ -109,14 +119,7 @@ namespace Recibo.View
 
         private void dgv_ReciboProvisorioAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex < 0)
-                return;
-        }
 
-        private void dgv_ReciboProvisorioAtos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1 || e.ColumnIndex < 0)
-                return;
         }
     }
 }

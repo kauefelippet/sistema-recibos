@@ -12,6 +12,7 @@ namespace Recibo.ViewModel
         public int ReciboProvisorioID => _reciboProvisorio.Id;
 
         public string Requerente { get; set; }
+        public string? Cpf { get; set; }
 
         public DateTime? Data => _reciboProvisorio.Data;
 
@@ -26,6 +27,7 @@ namespace Recibo.ViewModel
             _context = new recibos_dbContext();
             _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now };
             Requerente = string.Empty;
+            Cpf = string.Empty;
         }
 
         /// <summary>
@@ -68,12 +70,41 @@ namespace Recibo.ViewModel
 
         public void SaveChanges()
         {
-            _context.RecibosProvisorios.Add(_reciboProvisorio);
+            _reciboProvisorio.Requerente = Requerente ?? throw new Exception("O nome do Requerente deve ser informado.");
+            _reciboProvisorio.Cpf = Cpf;
+
+            // Check if the ReciboProvisorio already exists in the context
+            if (_reciboProvisorio.Id == 0)
+            {
+                _context.RecibosProvisorios.Add(_reciboProvisorio);
+            }
+            else
+            {
+                _context.RecibosProvisorios.Update(_reciboProvisorio);
+            }
+
             foreach (var ato in Atos)
             {
-                _context.ReciboProvisorioAtos.Add(ato);
+                // Check if the ReciboProvisorioAto already exists in the context
+                if (ato.Id == 0)
+                {
+                    _context.ReciboProvisorioAtos.Add(ato);
+                }
+                else
+                {
+                    _context.ReciboProvisorioAtos.Update(ato);
+                }
             }
-            _context.SaveChanges();
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Log the exception or handle it as needed
+                throw new Exception("An error occurred while saving changes to the database.", ex);
+            }
         }
 
         public ObservableCollection<ReciboProvisorioAto> GetAtosByReciboProvisorioId(int reciboProvisorioId)
