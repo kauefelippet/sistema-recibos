@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.Design;
 using Microsoft.EntityFrameworkCore;
 
 namespace Recibo.Models;
@@ -30,6 +31,12 @@ public partial class ReciboProvisorioAto
     [Column("quantidade")]
     public int Quantidade { get; set; }
 
+    [NotMapped]
+    public string AtoNome => Ato?.Nome;
+
+    [NotMapped]
+    public decimal Total => Ato.Total * Quantidade;
+
     [ForeignKey("AtoId")]
     [InverseProperty("ReciboProvisorioAtos")]
     public virtual Ato Ato { get; set; }
@@ -37,10 +44,4 @@ public partial class ReciboProvisorioAto
     [ForeignKey("ReciboProvisorioId")]
     [InverseProperty("ReciboProvisorioAtos")]
     public virtual ReciboProvisorio ReciboProvisorio { get; set; }
-
-    [NotMapped]
-    public decimal Total => Ato?.Total * Quantidade ?? 0;
-
-    [NotMapped]
-    public string AtoDescricao => Ato?.Descricao;
 }

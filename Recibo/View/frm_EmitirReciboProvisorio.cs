@@ -15,7 +15,8 @@ namespace Recibo.View
     public partial class frm_EmitirReciboProvisorio : Form
     {
         private ReciboProvisorioVM _reciboProvisorioVM;
-        private recibos_dbContext _context = new recibos_dbContext();
+        private recibos_dbContext _context = new();
+        private BindingSource _bindingSource = new();
         public frm_EmitirReciboProvisorio()
         {
             InitializeComponent();
@@ -25,8 +26,8 @@ namespace Recibo.View
 
         private void BindData()
         {
-            // Set the DataSource of the DataGridView to the ObservableCollection
-            dgv_ReciboProvisorioAtos.DataSource = _reciboProvisorioVM.Atos;
+            _bindingSource.DataSource = _reciboProvisorioVM.Atos;
+            dgv_ReciboProvisorioAtos.DataSource = _bindingSource;
 
             // Configure the DataGridView columns
             dgv_ReciboProvisorioAtos.AutoGenerateColumns = false;
@@ -35,7 +36,7 @@ namespace Recibo.View
             // Add columns for Ato, Descricao, Quantidade and Total of ReciboProvisorioAto
             dgv_ReciboProvisorioAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "AtoDescricao",
+                DataPropertyName = "AtoNome",
                 HeaderText = "Ato",
                 ReadOnly = true
             });
@@ -68,6 +69,11 @@ namespace Recibo.View
         {
             try
             {
+                if (string.IsNullOrEmpty(txtbox_CodigoAto.Text))
+                    throw new Exception("O código do Ato não foi informado.");
+                if (Convert.ToInt32(txtbox_Quantidade.Text) <= 0)
+                    throw new Exception("A quantidade deve ser maior que zero.");
+
                 var ato = _context.Atos.FirstOrDefault(a => a.Codigo == txtbox_CodigoAto.Text) ?? throw new Exception("O código do Ato informado não existe.");
                 var novoAto = new ReciboProvisorioAto
                 {
@@ -82,9 +88,8 @@ namespace Recibo.View
                 txtbox_Descricao.Clear();
                 txtbox_Quantidade.Clear();
 
-                // Refresh the DataGridView
-                dgv_ReciboProvisorioAtos.DataSource = null;
-                dgv_ReciboProvisorioAtos.DataSource = _reciboProvisorioVM.Atos;
+                // Refresh the BindingSource
+                _bindingSource.ResetBindings(false);
             }
             catch (Exception ex)
             {
@@ -95,6 +100,23 @@ namespace Recibo.View
         private void btn_Salvar_Click(object sender, EventArgs e)
         {
             _reciboProvisorioVM.SaveChanges();
+        }
+
+        private void txtbox_Requerente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_ReciboProvisorioAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex < 0)
+                return;
+        }
+
+        private void dgv_ReciboProvisorioAtos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex < 0)
+                return;
         }
     }
 }

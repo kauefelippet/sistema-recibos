@@ -48,8 +48,8 @@ namespace Recibo.View
 
             dgv_Atos.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "Descricao",
-                HeaderText = "Descrição"
+                DataPropertyName = "Nome",
+                HeaderText = "Nome"
             });
 
             dgv_Atos.Columns.Add(new DataGridViewTextBoxColumn

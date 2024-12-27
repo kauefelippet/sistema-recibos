@@ -34,14 +34,15 @@ public partial class Ato
     public decimal CustasIpesp { get; set; }
 
     [Required]
-    [Column("descricao")]
+    [Column("nome")]
     [StringLength(63)]
-    public string Descricao { get; set; }
- 
-   [NotMapped]
-    public decimal Total => CustasIpesp + CustasIss + CustasOficial;
+    public string Nome { get; set; }
 
-[InverseProperty("Ato")]
+    [NotMapped]
+    public decimal Total => CustasOficial + CustasIss + CustasIpesp;
+
+
+    [InverseProperty("Ato")]
     public virtual ICollection<ReciboAto> ReciboAtos { get; set; } = new List<ReciboAto>();
 
     [InverseProperty("Ato")]

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Recibo.Models;
 
 namespace Recibo.ViewModel
@@ -13,7 +12,7 @@ namespace Recibo.ViewModel
 
         public string Codigo { get; set; }
 
-        public string Descricao { get; set; }
+        public string Nome { get; set; }
 
         public decimal CustasIpesp { get; set; }
 
@@ -28,20 +27,20 @@ namespace Recibo.ViewModel
             _context = new recibos_dbContext();
             _ato = new Ato();
             Codigo = string.Empty;
-            Descricao = string.Empty;
+            Nome = string.Empty;
         }
 
-        public void CreateAto(string nome, string descricao, decimal custasIpesp, decimal custasIss, decimal custasOficial)
+        public void CreateAto(string codigo, string nome, decimal custasIpesp, decimal custasIss, decimal custasOficial)
         {
-            this.Codigo = nome ?? throw new Exception("O código do ato deve ser informado.");
-            this.Descricao = descricao ?? throw new Exception("A descrição do ato deve ser informada.");
+            this.Codigo = codigo ?? throw new Exception("O código do ato deve ser informado.");
+            this.Nome = nome ?? throw new Exception("A descrição do ato deve ser informada.");
             this.CustasIpesp = custasIpesp;
             this.CustasIss = custasIss;
             this.CustasOficial = custasOficial;
 
             // Populate the _ato object with the provided values
             _ato.Codigo = this.Codigo;
-            _ato.Descricao = this.Descricao;
+            _ato.Nome = this.Nome;
             _ato.CustasIpesp = this.CustasIpesp;
             _ato.CustasIss = this.CustasIss;
             _ato.CustasOficial = this.CustasOficial;
@@ -62,7 +61,8 @@ namespace Recibo.ViewModel
             }
         }
 
-        public void DeleteAto(string codigo) {
+        public void DeleteAto(string codigo)
+        {
             Ato ato = _context.Atos.FirstOrDefault(a => a.Codigo == codigo) ?? throw new Exception("Ato não encontrado.");
 
             _context.Atos.Remove(ato);
