@@ -1,33 +1,36 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Recibo.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Recibo.ViewModel
 {
-    internal class ReciboProvisorioVM
+    public class ReciboProvisorioVM
     {
-        private readonly ReciboProvisorio _reciboProvisorio;
         private readonly recibos_dbContext _context;
+        private readonly ReciboProvisorio _reciboProvisorio;
+        private readonly ILogger<ReciboProvisorioVM> _logger;
 
-        public int ReciboProvisorioID => _reciboProvisorio.Id;
 
         public string Requerente { get; set; }
         public string? Cpf { get; set; }
 
         public DateTime? Data => _reciboProvisorio.Data;
 
-        public ObservableCollection<ReciboProvisorioAto> Atos { get; } = new ObservableCollection<ReciboProvisorioAto>();
+        public ObservableCollection<ReciboProvisorioAto> Atos { get; } = new();
 
         public string? CodigoAto { get; set; }
         public string? Descricao { get; set; }
         public int Quantidade { get; set; }
 
-        public ReciboProvisorioVM()
+        public ReciboProvisorioVM(ILogger<ReciboProvisorioVM> logger)
         {
             _context = new recibos_dbContext();
-            _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now };
+            _reciboProvisorio = new ReciboProvisorio();
             Requerente = string.Empty;
             Cpf = string.Empty;
+            _logger = logger;
         }
 
         /// <summary>
@@ -51,8 +54,15 @@ namespace Recibo.ViewModel
                 Ato = ato,
                 Quantidade = Quantidade,
                 Descricao = Descricao,
-                ReciboProvisorio = _reciboProvisorio
+                ReciboProvisorio = _reciboProvisorio,
+                ReciboProvisorioId = _reciboProvisorio.Id,
+                AtoId = ato.Id
             };
+
+            reciboProvisorioAto.ReciboProvisorio = _reciboProvisorio;
+            reciboProvisorioAto.Ato = ato;
+            reciboProvisorioAto.AtoId = ato.Id;
+
             Atos.Add(reciboProvisorioAto);
             _reciboProvisorio.ReciboProvisorioAtos.Add(reciboProvisorioAto);
         }
@@ -70,7 +80,8 @@ namespace Recibo.ViewModel
 
         public void SaveChanges()
         {
-            _reciboProvisorio.Requerente = Requerente ?? throw new Exception("O nome do Requerente deve ser informado.");
+            // Ensure the Requerente is set
+            _reciboProvisorio.Requerente = Requerente;
             _reciboProvisorio.Cpf = Cpf;
 
             // Check if the ReciboProvisorio already exists in the context
@@ -83,29 +94,74 @@ namespace Recibo.ViewModel
                 _context.RecibosProvisorios.Update(_reciboProvisorio);
             }
 
-            foreach (var ato in Atos)
-            {
-                // Check if the ReciboProvisorioAto already exists in the context
-                if (ato.Id == 0)
-                {
-                    _context.ReciboProvisorioAtos.Add(ato);
-                }
-                else
-                {
-                    _context.ReciboProvisorioAtos.Update(ato);
-                }
-            }
-
             try
             {
+                // Save changes to ensure ReciboProvisorio gets an ID
+                _context.SaveChanges();
+
+                // Now add or update ReciboProvisorioAtos
+                foreach (var rpa in Atos)
+                {
+                    // Ensure the ReciboProvisorioId is set
+                    rpa.ReciboProvisorioId = _reciboProvisorio.Id;
+                    rpa.AtoId = rpa.Ato.Id;
+
+                    // Ensure the navigation properties are set
+                    rpa.ReciboProvisorio = _reciboProvisorio;
+                    rpa.Ato = _context.Atos.Find(rpa.AtoId);
+
+                    // Check if the entity is already being tracked by the context
+                    var existingAto = _context.ReciboProvisorioAtos
+                                              .FirstOrDefault(a => a.Id == rpa.Id);
+
+                    if (existingAto == null)
+                    {
+                        _context.ReciboProvisorioAtos.Add(rpa);
+                    }
+                    else
+                    {
+                        _context.Entry(existingAto).CurrentValues.SetValues(rpa);
+                    }
+                }
+
+                // Save changes again to persist ReciboProvisorioAtos
                 _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
-                // Log the exception or handle it as needed
-                throw new Exception("An error occurred while saving changes to the database.", ex);
+                // Log detailed information
+                var entries = ex.Entries;
+                foreach (var entry in entries)
+                {
+                    // Log entry details
+                    var entityType = entry.Entity.GetType().Name;
+                    var state = entry.State.ToString();
+                    var originalValues = entry.OriginalValues.Properties
+                        .ToDictionary(p => p.Name, p => entry.OriginalValues[p]?.ToString());
+                    var currentValues = entry.CurrentValues.Properties
+                        .ToDictionary(p => p.Name, p => entry.CurrentValues[p]?.ToString());
+
+                    // Log the details using the logger instance
+                    _logger.LogError($"Entity Type: {entityType}, State: {state}");
+                    _logger.LogError("Original Values: " + string.Join(", ", originalValues.Select(kv => $"{kv.Key}: {kv.Value}")));
+                    _logger.LogError("Current Values: " + string.Join(", ", currentValues.Select(kv => $"{kv.Key}: {kv.Value}")));
+                }
+                throw new Exception("Ocorreu um erro ao salvar o Recibo Provisório no banco de dados.", ex);
+            }
+            catch (ValidationException ex)
+            {
+                // Handle validation exceptions
+                throw new Exception("Os dados fornecidos são inválidos.", ex);
+            }
+            catch (Exception ex)
+            {
+                // Handle all other exceptions
+                throw new Exception("Ocorreu um erro inesperado ao salvar o Recibo Provisório.", ex);
             }
         }
+
+
+
 
         public ObservableCollection<ReciboProvisorioAto> GetAtosByReciboProvisorioId(int reciboProvisorioId)
         {

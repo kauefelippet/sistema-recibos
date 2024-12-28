@@ -38,6 +38,7 @@
             btn_Recentes = new Button();
             btn_Consulta = new Button();
             pnl_EmissaoReciboProvisorio = new Panel();
+            lbl_NomeAto = new Label();
             dgv_ReciboProvisorioAtos = new DataGridView();
             btn_Salvar = new Button();
             btn_Adicionar = new Button();
@@ -124,6 +125,7 @@
             // 
             // pnl_EmissaoReciboProvisorio
             // 
+            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_NomeAto);
             pnl_EmissaoReciboProvisorio.Controls.Add(dgv_ReciboProvisorioAtos);
             pnl_EmissaoReciboProvisorio.Controls.Add(btn_Salvar);
             pnl_EmissaoReciboProvisorio.Controls.Add(btn_Adicionar);
@@ -141,6 +143,16 @@
             pnl_EmissaoReciboProvisorio.Name = "pnl_EmissaoReciboProvisorio";
             pnl_EmissaoReciboProvisorio.Size = new Size(762, 451);
             pnl_EmissaoReciboProvisorio.TabIndex = 5;
+            // 
+            // lbl_NomeAto
+            // 
+            lbl_NomeAto.Anchor = AnchorStyles.Left;
+            lbl_NomeAto.Font = new Font("JetBrains Mono Light", 9F);
+            lbl_NomeAto.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_NomeAto.Location = new Point(42, 111);
+            lbl_NomeAto.Name = "lbl_NomeAto";
+            lbl_NomeAto.Size = new Size(168, 21);
+            lbl_NomeAto.TabIndex = 14;
             // 
             // dgv_ReciboProvisorioAtos
             // 
@@ -195,7 +207,6 @@
             dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgv_ReciboProvisorioAtos.Size = new Size(552, 389);
             dgv_ReciboProvisorioAtos.TabIndex = 13;
-            dgv_ReciboProvisorioAtos.CellContentClick += dgv_ReciboProvisorioAtos_CellContentClick;
             // 
             // btn_Salvar
             // 
@@ -254,6 +265,7 @@
             txtbox_Quantidade.Name = "txtbox_Quantidade";
             txtbox_Quantidade.Size = new Size(40, 20);
             txtbox_Quantidade.TabIndex = 9;
+            txtbox_Quantidade.KeyPress += txtbox_Quantidade_KeyPress;
             // 
             // lbl_Quantidade
             // 
@@ -304,6 +316,7 @@
             txtbox_CodigoAto.Name = "txtbox_CodigoAto";
             txtbox_CodigoAto.Size = new Size(40, 20);
             txtbox_CodigoAto.TabIndex = 5;
+            txtbox_CodigoAto.TextChanged += txtbox_CodigoAto_TextChanged;
             // 
             // lbl_CodigoAto
             // 
@@ -326,10 +339,12 @@
             txtbox_CPF.Font = new Font("JetBrains Mono Light", 11F);
             txtbox_CPF.ForeColor = Color.FromArgb(222, 226, 230);
             txtbox_CPF.Location = new Point(0, 62);
-            txtbox_CPF.MaxLength = 11;
+            txtbox_CPF.MaxLength = 14;
             txtbox_CPF.Name = "txtbox_CPF";
             txtbox_CPF.Size = new Size(210, 20);
             txtbox_CPF.TabIndex = 3;
+            txtbox_CPF.TextChanged += txtbox_CPF_TextChanged;
+            txtbox_CPF.KeyPress += txtbox_CPF_KeyPress;
             // 
             // lbl_Cpf
             // 
@@ -358,7 +373,6 @@
             txtbox_Requerente.Name = "txtbox_Requerente";
             txtbox_Requerente.Size = new Size(762, 20);
             txtbox_Requerente.TabIndex = 1;
-            txtbox_Requerente.TextChanged += txtbox_Requerente_TextChanged;
             // 
             // lbl_Requerente
             // 
@@ -432,5 +446,6 @@
         private Button btn_Salvar;
         private DataGridView dgv_ReciboProvisorioAtos;
         private Label lbl_IdRecibo;
+        private Label lbl_NomeAto;
     }
 }

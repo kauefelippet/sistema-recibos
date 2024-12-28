@@ -1,4 +1,5 @@
 ﻿using Recibo.Models;
+using Recibo.Util;
 using Recibo.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,20 @@ namespace Recibo.View
     public partial class frm_EmitirReciboProvisorio : Form
     {
         private ReciboProvisorioVM _reciboProvisorioVM;
-        private recibos_dbContext _context = new();
+        private recibos_dbContext _context;
         private BindingSource _bindingSource = new();
-        public frm_EmitirReciboProvisorio()
+
+        public frm_EmitirReciboProvisorio(ReciboProvisorioVM reciboProvisorioVM, recibos_dbContext context)
         {
             InitializeComponent();
-            _reciboProvisorioVM = new ReciboProvisorioVM();
+            _reciboProvisorioVM = reciboProvisorioVM;
+            _context = context;
             BindData();
         }
 
         private void BindData()
         {
+            // Bind the ReciboProvisorioVM to the form
             _bindingSource.DataSource = _reciboProvisorioVM.Atos;
             dgv_ReciboProvisorioAtos.DataSource = _bindingSource;
 
@@ -62,7 +66,9 @@ namespace Recibo.View
 
         private void frm_EmitirReciboProvisorio_Load(object sender, EventArgs e)
         {
-            lbl_IdRecibo.Text = "Recibo nº " + _reciboProvisorioVM.ReciboProvisorioID.ToString();
+            var latestReciboProvisorio = _context.RecibosProvisorios.OrderByDescending(r => r.Id).FirstOrDefault();
+            int nextReciboProvisorioId = latestReciboProvisorio != null ? latestReciboProvisorio.Id + 1 : 1;
+            lbl_IdRecibo.Text = "Recibo nº " + nextReciboProvisorioId;
         }
 
         private void btn_Adicionar_Click(object sender, EventArgs e)
@@ -101,10 +107,22 @@ namespace Recibo.View
         {
             try
             {
+                if (_reciboProvisorioVM.Atos.Count == 0)
+                    throw new Exception("O Recibo Provisório deve conter ao menos um Ato.");
+                if (string.IsNullOrEmpty(txtbox_Requerente.Text))
+                {
+                    throw new Exception("O nome do Requerente deve ser informado.");
+                }
+
                 _reciboProvisorioVM.Requerente = txtbox_Requerente.Text;
-                _reciboProvisorioVM.Cpf = txtbox_CPF.Text;
+                _reciboProvisorioVM.Cpf = txtbox_CPF.Text.Replace(".", "").Replace("-", "");
 
                 _reciboProvisorioVM.SaveChanges();
+
+                // Updates the ID label
+                var latestReciboProvisorio = _context.RecibosProvisorios.OrderByDescending(r => r.Id).FirstOrDefault();
+                int nextReciboProvisorioId = latestReciboProvisorio != null ? latestReciboProvisorio.Id + 1 : 1;
+                lbl_IdRecibo.Text = "Recibo nº " + nextReciboProvisorioId;
             }
             catch (Exception ex)
             {
@@ -112,14 +130,93 @@ namespace Recibo.View
             }
         }
 
-        private void txtbox_Requerente_TextChanged(object sender, EventArgs e)
-        {
 
+        private void txtbox_CPF_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txtCpf = (TextBox)sender;
+
+                if (txtCpf == null) return;
+
+                // Removes all non-numeric characters from the text
+                string formattedCpf = new string(txtCpf.Text.Where(char.IsDigit).ToArray());
+
+                // Formats the CPF with the correct mask
+                if (formattedCpf.Length > 6)
+                    formattedCpf = formattedCpf.Insert(6, "."); // Adiciona o ponto após os primeiros 3 números
+
+                if (formattedCpf.Length > 3)
+                    formattedCpf = formattedCpf.Insert(3, "."); // Adiciona o ponto após os próximos 3 números
+
+                if (formattedCpf.Length > 11)
+                    formattedCpf = formattedCpf.Insert(11, "-"); // Adiciona o hífen após os 6 primeiros números
+
+                // Updates the text in the TextBox
+                txtCpf.Text = formattedCpf;
+
+                // Positions the cursor at the end of the text
+                txtCpf.SelectionStart = formattedCpf.Length;
+
+                // Validates the CPF and changes the text color accordingly
+                if (Validation.ValidarCPF(formattedCpf))
+                {
+                    txtbox_CPF.ForeColor = Color.FromArgb(153, 204, 51);
+                }
+                else
+                {
+                    txtbox_CPF.ForeColor = Color.FromArgb(238, 68, 102);
+
+                    if (txtbox_CPF.TextLength == 14)
+                    {
+                        txtbox_CPF.Clear();
+                        throw new Exception("CPF inválido.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void dgv_ReciboProvisorioAtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void txtbox_CodigoAto_TextChanged(object sender, EventArgs e)
         {
+            if (txtbox_CodigoAto.TextLength == 3)
+            {
+                try
+                {
+                    var ato = _context.Atos.FirstOrDefault(a => a.Codigo == txtbox_CodigoAto.Text) ?? throw new Exception("O código do Ato informado não existe.");
+                    lbl_NomeAto.Text = ato.Nome;
+                }
+                catch (Exception ex)
+                {
+                    txtbox_CodigoAto.Clear();
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (txtbox_CodigoAto.TextLength < 3)
+            {
+                lbl_NomeAto.Text = "";
+            }
 
+        }
+        private void txtbox_CPF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permits only numbers
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtbox_Quantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permits only numbers
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -1,13 +1,19 @@
+using Microsoft.Extensions.DependencyInjection;
+using Recibo.Models;
 using Recibo.View;
+using Recibo.ViewModel;
 
 namespace Recibo
 {
     public partial class Home : Form
     {
         private Form? frmAtivo;
-        public Home()
+        private readonly IServiceProvider _serviceProvider;
+
+        public Home(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
         }
 
         private void FormShow(Form frm)
@@ -92,7 +98,9 @@ namespace Recibo
         private void btn_ReciboProvisorio_Click(object sender, EventArgs e)
         {
             ActiveButton(btn_ReciboProvisorio);
-            FormShow(new frm_EmitirReciboProvisorio());
+            var reciboProvisorioVM = _serviceProvider.GetRequiredService<ReciboProvisorioVM>();
+            var context = _serviceProvider.GetRequiredService<recibos_dbContext>();
+            FormShow(new frm_EmitirReciboProvisorio(reciboProvisorioVM, context));
         }
 
         private void btn_Atos_Click(object sender, EventArgs e)
