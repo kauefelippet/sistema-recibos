@@ -96,6 +96,10 @@ namespace Recibo.View
 
                 // Refresh the BindingSource
                 _bindingSource.ResetBindings(false);
+
+                // Updates the total value of the ReciboProvisorio
+                var total = _reciboProvisorioVM.Atos.Sum(a => a.Total);
+                lbl_TotalRecibo.Text = "Total: R$ " + total.ToString();
             }
             catch (Exception ex)
             {
@@ -119,10 +123,7 @@ namespace Recibo.View
 
                 _reciboProvisorioVM.SaveChanges();
 
-                // Updates the ID label
-                var latestReciboProvisorio = _context.RecibosProvisorios.OrderByDescending(r => r.Id).FirstOrDefault();
-                int nextReciboProvisorioId = latestReciboProvisorio != null ? latestReciboProvisorio.Id + 1 : 1;
-                lbl_IdRecibo.Text = "Recibo nº " + nextReciboProvisorioId;
+                RefreshForm();
             }
             catch (Exception ex)
             {
@@ -130,6 +131,33 @@ namespace Recibo.View
             }
         }
 
+        private void RefreshForm()
+        {
+            // Clear the current data bindings
+            _bindingSource.DataSource = null;
+
+            // Clear the Atos collection
+            _reciboProvisorioVM.Atos.Clear();
+
+            // Re-fetch the data from the database if necessary
+            var latestReciboProvisorio = _context.RecibosProvisorios.OrderByDescending(r => r.Id).FirstOrDefault();
+            int nextReciboProvisorioId = latestReciboProvisorio != null ? latestReciboProvisorio.Id + 1 : 1;
+            lbl_IdRecibo.Text = "Recibo nº " + nextReciboProvisorioId;
+
+            // Re-bind the data to the form controls
+            _bindingSource.DataSource = _reciboProvisorioVM.Atos;
+            dgv_ReciboProvisorioAtos.DataSource = _bindingSource;
+
+            // Clear the form fields
+            txtbox_Requerente.Clear();
+            txtbox_CPF.Clear();
+            txtbox_CodigoAto.Clear();
+            txtbox_Descricao.Clear();
+            txtbox_Quantidade.Clear();
+            lbl_ValorQuantidade.Text = "";
+            lbl_NomeAto.Text = "";
+            lbl_TotalRecibo.Text = "Total: R$ 0,00";
+        }
 
         private void txtbox_CPF_TextChanged(object sender, EventArgs e)
         {
@@ -144,13 +172,13 @@ namespace Recibo.View
 
                 // Formats the CPF with the correct mask
                 if (formattedCpf.Length > 6)
-                    formattedCpf = formattedCpf.Insert(6, "."); // Adiciona o ponto após os primeiros 3 números
+                    formattedCpf = formattedCpf.Insert(6, ".");
 
                 if (formattedCpf.Length > 3)
-                    formattedCpf = formattedCpf.Insert(3, "."); // Adiciona o ponto após os próximos 3 números
+                    formattedCpf = formattedCpf.Insert(3, ".");
 
                 if (formattedCpf.Length > 11)
-                    formattedCpf = formattedCpf.Insert(11, "-"); // Adiciona o hífen após os 6 primeiros números
+                    formattedCpf = formattedCpf.Insert(11, "-");
 
                 // Updates the text in the TextBox
                 txtCpf.Text = formattedCpf;
@@ -216,6 +244,41 @@ namespace Recibo.View
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void txtbox_Quantidade_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtbox_Quantidade.Text) && !string.IsNullOrEmpty(txtbox_CodigoAto.Text))
+            {
+                try
+                {
+                    var ato = _context.Atos.FirstOrDefault(a => a.Codigo == txtbox_CodigoAto.Text);
+                    if (ato != null && int.TryParse(txtbox_Quantidade.Text, out int quantidade))
+                    {
+                        lbl_ValorQuantidade.Text = "* " + ato.Total + " = " + (ato.Total * quantidade);
+                    }
+                    else
+                    {
+                        lbl_ValorQuantidade.Text = "";
+                        if (ato == null)
+                        {
+                            throw new Exception("O código do Ato informado não existe.");
+                        }
+                        else
+                        {
+                            throw new Exception("A quantidade deve ser um número válido.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                lbl_ValorQuantidade.Text = "";
             }
         }
     }

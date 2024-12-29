@@ -38,6 +38,8 @@
             btn_Recentes = new Button();
             btn_Consulta = new Button();
             pnl_EmissaoReciboProvisorio = new Panel();
+            lbl_ValorQuantidade = new Label();
+            lbl_TotalRecibo = new Label();
             lbl_NomeAto = new Label();
             dgv_ReciboProvisorioAtos = new DataGridView();
             btn_Salvar = new Button();
@@ -125,6 +127,8 @@
             // 
             // pnl_EmissaoReciboProvisorio
             // 
+            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_ValorQuantidade);
+            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_TotalRecibo);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_NomeAto);
             pnl_EmissaoReciboProvisorio.Controls.Add(dgv_ReciboProvisorioAtos);
             pnl_EmissaoReciboProvisorio.Controls.Add(btn_Salvar);
@@ -143,6 +147,27 @@
             pnl_EmissaoReciboProvisorio.Name = "pnl_EmissaoReciboProvisorio";
             pnl_EmissaoReciboProvisorio.Size = new Size(762, 451);
             pnl_EmissaoReciboProvisorio.TabIndex = 5;
+            // 
+            // lbl_ValorQuantidade
+            // 
+            lbl_ValorQuantidade.Anchor = AnchorStyles.Left;
+            lbl_ValorQuantidade.Font = new Font("JetBrains Mono Light", 9F);
+            lbl_ValorQuantidade.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_ValorQuantidade.Location = new Point(42, 204);
+            lbl_ValorQuantidade.Name = "lbl_ValorQuantidade";
+            lbl_ValorQuantidade.Size = new Size(168, 21);
+            lbl_ValorQuantidade.TabIndex = 16;
+            // 
+            // lbl_TotalRecibo
+            // 
+            lbl_TotalRecibo.AutoSize = true;
+            lbl_TotalRecibo.Font = new Font("JetBrains Mono Light", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_TotalRecibo.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_TotalRecibo.Location = new Point(0, 315);
+            lbl_TotalRecibo.Name = "lbl_TotalRecibo";
+            lbl_TotalRecibo.Size = new Size(150, 21);
+            lbl_TotalRecibo.TabIndex = 15;
+            lbl_TotalRecibo.Text = "Total: R$ 0,00";
             // 
             // lbl_NomeAto
             // 
@@ -265,6 +290,7 @@
             txtbox_Quantidade.Name = "txtbox_Quantidade";
             txtbox_Quantidade.Size = new Size(40, 20);
             txtbox_Quantidade.TabIndex = 9;
+            txtbox_Quantidade.TextChanged += txtbox_Quantidade_TextChanged;
             txtbox_Quantidade.KeyPress += txtbox_Quantidade_KeyPress;
             // 
             // lbl_Quantidade
@@ -447,5 +473,7 @@
         private DataGridView dgv_ReciboProvisorioAtos;
         private Label lbl_IdRecibo;
         private Label lbl_NomeAto;
+        private Label lbl_TotalRecibo;
+        private Label lbl_ValorQuantidade;
     }
 }
