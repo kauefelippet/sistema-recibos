@@ -18,6 +18,7 @@ namespace Recibo.View
         private ReciboProvisorioVM _reciboProvisorioVM;
         private recibos_dbContext _context;
         private BindingSource _bindingSource = new();
+        private int selectedRowIndex;
 
         public frm_EmitirReciboProvisorio(ReciboProvisorioVM reciboProvisorioVM, recibos_dbContext context)
         {
@@ -42,25 +43,29 @@ namespace Recibo.View
             {
                 DataPropertyName = "AtoNome",
                 HeaderText = "Ato",
+                Name = "AtoNome",
                 ReadOnly = true
             });
 
             dgv_ReciboProvisorioAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Descricao",
-                HeaderText = "Descrição"
+                HeaderText = "Descrição",
+                Name = "Descricao"
             });
 
             dgv_ReciboProvisorioAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Quantidade",
-                HeaderText = "Quantidade"
+                HeaderText = "Quantidade",
+                Name = "Quantidade"
             });
 
             dgv_ReciboProvisorioAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Total",
-                HeaderText = "Total"
+                HeaderText = "Total",
+                Name = "Total"
             });
         }
 
@@ -75,21 +80,15 @@ namespace Recibo.View
         {
             try
             {
-                if (string.IsNullOrEmpty(txtbox_CodigoAto.Text))
-                    throw new Exception("O código do Ato não foi informado.");
-                if (string.IsNullOrEmpty(txtbox_Quantidade.Text))
-                    throw new Exception("A quantidade deve ser maior que zero.");
+                // Binds the textboxes data to the ReciboProvisorioVM
+                _reciboProvisorioVM.CodigoAto = txtbox_CodigoAto.Text;
+                _reciboProvisorioVM.Descricao = txtbox_Descricao.Text;
+                _reciboProvisorioVM.Quantidade = int.Parse(txtbox_Quantidade.Text);
 
-                var ato = _context.Atos.FirstOrDefault(a => a.Codigo == txtbox_CodigoAto.Text) ?? throw new Exception("O código do Ato informado não existe.");
-                var novoAto = new ReciboProvisorioAto
-                {
-                    Descricao = txtbox_Descricao.Text,
-                    Quantidade = Convert.ToInt32(txtbox_Quantidade.Text),
-                    Ato = ato
-                };
+                // Adds the Ato to the ReciboProvisorioVM
+                _reciboProvisorioVM.AddAto();
 
-                _reciboProvisorioVM.Atos.Add(novoAto);
-
+                // Clear the textboxes
                 txtbox_CodigoAto.Clear();
                 txtbox_Descricao.Clear();
                 txtbox_Quantidade.Clear();
@@ -279,6 +278,88 @@ namespace Recibo.View
             else
             {
                 lbl_ValorQuantidade.Text = "";
+            }
+        }
+
+        private void dgv_ReciboProvisorioAtos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Ensure the row index is valid
+            {
+                selectedRowIndex = e.RowIndex;
+                DataGridViewRow selectedRow = dgv_ReciboProvisorioAtos.Rows[selectedRowIndex];
+
+                // Get the Ato by searching on the database
+                var ato = _context.Atos.FirstOrDefault(a => a.Nome == selectedRow.Cells["AtoNome"].Value.ToString());
+
+                // Set the textboxes with the corresponding values from the DataGridView
+                txtbox_CodigoAto.Text = ato.Codigo;
+                txtbox_Descricao.Text = selectedRow.Cells["Descricao"].Value.ToString();
+                txtbox_Quantidade.Text = selectedRow.Cells["Quantidade"].Value.ToString();
+            }
+        }
+
+        private void btn_Excluir_Click(object sender, EventArgs e)
+        {
+            // Ensure the selectedRowIndex is valid
+            if (selectedRowIndex >= 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = dgv_ReciboProvisorioAtos.Rows[selectedRowIndex];
+
+                // Get the Ato by searching on the database
+                var ato = _context.Atos.FirstOrDefault(a => a.Nome == selectedRow.Cells["AtoNome"].Value.ToString());
+
+                // Remove the Ato from the ReciboProvisorioVM
+                _reciboProvisorioVM.RemoveAto(selectedRowIndex);
+
+                // Refresh the BindingSource
+                _bindingSource.ResetBindings(false);
+
+                // Updates the total value of the ReciboProvisorio
+                var total = _reciboProvisorioVM.Atos.Sum(a => a.Total);
+                lbl_TotalRecibo.Text = "Total: R$ " + total.ToString();
+
+                // Clear the textboxes
+                txtbox_CodigoAto.Clear();
+                txtbox_Descricao.Clear();
+                txtbox_Quantidade.Clear();
+            }
+        }
+
+        private void btn_Editar_Click(object sender, EventArgs e)
+        {
+            // Ensure the selectedRowIndex is valid
+            if (selectedRowIndex >= 0)
+            {
+                try
+                {
+                    // Get the selected row
+                    DataGridViewRow selectedRow = dgv_ReciboProvisorioAtos.Rows[selectedRowIndex];
+
+                    // Binds the textboxes data to the ReciboProvisorioVM
+                    _reciboProvisorioVM.CodigoAto = txtbox_CodigoAto.Text;
+                    _reciboProvisorioVM.Descricao = txtbox_Descricao.Text;
+                    _reciboProvisorioVM.Quantidade = int.Parse(txtbox_Quantidade.Text);
+
+                    // Edit the Ato based on the selectedRowIndex
+                    _reciboProvisorioVM.EditAto(selectedRowIndex);
+
+                    // Refresh the BindingSource
+                    _bindingSource.ResetBindings(false);
+
+                    // Updates the total value of the ReciboProvisorio
+                    var total = _reciboProvisorioVM.Atos.Sum(a => a.Total);
+                    lbl_TotalRecibo.Text = "Total: R$ " + total.ToString();
+
+                    // Clear the textboxes
+                    txtbox_CodigoAto.Clear();
+                    txtbox_Descricao.Clear();
+                    txtbox_Quantidade.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

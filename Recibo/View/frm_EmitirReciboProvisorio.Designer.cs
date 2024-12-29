@@ -38,6 +38,8 @@
             btn_Recentes = new Button();
             btn_Consulta = new Button();
             pnl_EmissaoReciboProvisorio = new Panel();
+            btn_Excluir = new Button();
+            btn_Editar = new Button();
             lbl_ValorQuantidade = new Label();
             lbl_TotalRecibo = new Label();
             lbl_NomeAto = new Label();
@@ -127,6 +129,8 @@
             // 
             // pnl_EmissaoReciboProvisorio
             // 
+            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Excluir);
+            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Editar);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_ValorQuantidade);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_TotalRecibo);
             pnl_EmissaoReciboProvisorio.Controls.Add(lbl_NomeAto);
@@ -148,6 +152,50 @@
             pnl_EmissaoReciboProvisorio.Size = new Size(762, 451);
             pnl_EmissaoReciboProvisorio.TabIndex = 5;
             // 
+            // btn_Excluir
+            // 
+            btn_Excluir.BackColor = Color.FromArgb(52, 58, 64);
+            btn_Excluir.BackgroundImageLayout = ImageLayout.None;
+            btn_Excluir.Cursor = Cursors.Hand;
+            btn_Excluir.FlatAppearance.BorderSize = 0;
+            btn_Excluir.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_Excluir.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_Excluir.FlatStyle = FlatStyle.Flat;
+            btn_Excluir.Font = new Font("JetBrains Mono Light", 11F);
+            btn_Excluir.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_Excluir.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_Excluir.Location = new Point(0, 311);
+            btn_Excluir.Margin = new Padding(5);
+            btn_Excluir.Name = "btn_Excluir";
+            btn_Excluir.Size = new Size(100, 30);
+            btn_Excluir.TabIndex = 18;
+            btn_Excluir.Text = "EXCLUIR";
+            btn_Excluir.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_Excluir.UseVisualStyleBackColor = false;
+            btn_Excluir.Click += btn_Excluir_Click;
+            // 
+            // btn_Editar
+            // 
+            btn_Editar.BackColor = Color.FromArgb(52, 58, 64);
+            btn_Editar.BackgroundImageLayout = ImageLayout.None;
+            btn_Editar.Cursor = Cursors.Hand;
+            btn_Editar.FlatAppearance.BorderSize = 0;
+            btn_Editar.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_Editar.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_Editar.FlatStyle = FlatStyle.Flat;
+            btn_Editar.Font = new Font("JetBrains Mono Light", 11F);
+            btn_Editar.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_Editar.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_Editar.Location = new Point(0, 271);
+            btn_Editar.Margin = new Padding(5);
+            btn_Editar.Name = "btn_Editar";
+            btn_Editar.Size = new Size(100, 30);
+            btn_Editar.TabIndex = 17;
+            btn_Editar.Text = "EDITAR";
+            btn_Editar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_Editar.UseVisualStyleBackColor = false;
+            btn_Editar.Click += btn_Editar_Click;
+            // 
             // lbl_ValorQuantidade
             // 
             lbl_ValorQuantidade.Anchor = AnchorStyles.Left;
@@ -163,7 +211,7 @@
             lbl_TotalRecibo.AutoSize = true;
             lbl_TotalRecibo.Font = new Font("JetBrains Mono Light", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbl_TotalRecibo.ForeColor = Color.FromArgb(206, 212, 218);
-            lbl_TotalRecibo.Location = new Point(0, 315);
+            lbl_TotalRecibo.Location = new Point(0, 346);
             lbl_TotalRecibo.Name = "lbl_TotalRecibo";
             lbl_TotalRecibo.Size = new Size(150, 21);
             lbl_TotalRecibo.TabIndex = 15;
@@ -232,12 +280,14 @@
             dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgv_ReciboProvisorioAtos.Size = new Size(552, 389);
             dgv_ReciboProvisorioAtos.TabIndex = 13;
+            dgv_ReciboProvisorioAtos.CellClick += dgv_ReciboProvisorioAtos_CellClick;
             // 
             // btn_Salvar
             // 
-            btn_Salvar.BackColor = Color.FromArgb(52, 58, 64);
+            btn_Salvar.BackColor = Color.FromArgb(108, 117, 125);
             btn_Salvar.BackgroundImageLayout = ImageLayout.None;
             btn_Salvar.Cursor = Cursors.Hand;
+            btn_Salvar.FlatAppearance.BorderColor = Color.FromArgb(52, 58, 64);
             btn_Salvar.FlatAppearance.BorderSize = 0;
             btn_Salvar.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
             btn_Salvar.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
@@ -245,7 +295,7 @@
             btn_Salvar.Font = new Font("JetBrains Mono Light", 11F);
             btn_Salvar.ForeColor = Color.FromArgb(206, 212, 218);
             btn_Salvar.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Salvar.Location = new Point(0, 271);
+            btn_Salvar.Location = new Point(110, 231);
             btn_Salvar.Margin = new Padding(5);
             btn_Salvar.Name = "btn_Salvar";
             btn_Salvar.Size = new Size(100, 30);
@@ -475,5 +525,7 @@
         private Label lbl_NomeAto;
         private Label lbl_TotalRecibo;
         private Label lbl_ValorQuantidade;
+        private Button btn_Excluir;
+        private Button btn_Editar;
     }
 }

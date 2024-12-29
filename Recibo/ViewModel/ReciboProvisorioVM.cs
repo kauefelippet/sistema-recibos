@@ -41,11 +41,11 @@ namespace Recibo.ViewModel
         {
             if (string.IsNullOrEmpty(CodigoAto))
             {
-                throw new ArgumentException("Ato não informado");
+                throw new ArgumentException("O código do Ato não foi informado.");
             }
             if (Quantidade <= 0)
             {
-                throw new ArgumentException("Quantidade deve ser maior que zero");
+                throw new ArgumentException("Quantidade deve ser maior que zero.");
             }
 
             var ato = _context.Atos.FirstOrDefault(a => a.Codigo == CodigoAto) ?? throw new ArgumentException("Ato inexistente");
@@ -67,15 +67,51 @@ namespace Recibo.ViewModel
             _reciboProvisorio.ReciboProvisorioAtos.Add(reciboProvisorioAto);
         }
 
-        public void RemoveAto(ReciboProvisorioAto ato)
+        public void EditAto(int index)
         {
-            if (ato != null && Atos.Contains(ato))
+            // Check if the index, ato and quantidade is valid
+            if (index < 0 || index >= Atos.Count)
             {
-                Atos.Remove(ato);
-                _reciboProvisorio.ReciboProvisorioAtos.Remove(ato);
-                _context.ReciboProvisorioAtos.Remove(ato);
-                _context.SaveChanges();
+                throw new ArgumentException("Índice inválido");
             }
+            if (string.IsNullOrEmpty(CodigoAto))
+            {
+                throw new ArgumentException("Ato não informado");
+            }
+            if (Quantidade <= 0)
+            {
+                throw new ArgumentException("Quantidade deve ser maior que zero");
+            }
+
+            // Check if the Ato exists
+            var ato = _context.Atos.FirstOrDefault(a => a.Codigo == CodigoAto) ?? throw new ArgumentException("Ato inexistente");
+
+            // Update the ReciboProvisorioAto
+            var reciboProvisorioAto = Atos[index];
+            reciboProvisorioAto.Ato = ato;
+            reciboProvisorioAto.Descricao = Descricao;
+            reciboProvisorioAto.Quantidade = Quantidade;
+            reciboProvisorioAto.AtoId = ato.Id;
+
+            // Update the ReciboProvisorio
+            _reciboProvisorio.ReciboProvisorioAtos.Remove(reciboProvisorioAto);
+            Atos.Remove(reciboProvisorioAto);
+            _reciboProvisorio.ReciboProvisorioAtos.Add(reciboProvisorioAto);
+            Atos.Add(reciboProvisorioAto);
+        }
+
+        public void RemoveAto(int index)
+        {
+            // Check if the index is valid
+            if (index < 0 || index >= Atos.Count)
+            {
+                throw new ArgumentException("Índice inválido");
+            }
+
+            // Remove the ReciboProvisorioAto from the ReciboProvisorio
+            var reciboProvisorioAto = Atos[index];
+            _reciboProvisorio.ReciboProvisorioAtos.Remove(reciboProvisorioAto);
+            Atos.Remove(reciboProvisorioAto);
         }
 
         public void SaveChanges()
@@ -159,9 +195,6 @@ namespace Recibo.ViewModel
                 throw new Exception("Ocorreu um erro inesperado ao salvar o Recibo Provisório.", ex);
             }
         }
-
-
-
 
         public ObservableCollection<ReciboProvisorioAto> GetAtosByReciboProvisorioId(int reciboProvisorioId)
         {
