@@ -40,6 +40,7 @@ namespace Recibo
                         options.UseMySql("server=localhost;port=3307;database=recibos_db;uid=root;pwd=secret", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.39-mysql")));
                     services.AddTransient<ReciboProvisorioVM>();
                     services.AddTransient<frm_EmitirReciboProvisorio>();
+                    services.AddTransient<frm_RecentesReciboProvisorio>();
                     services.AddTransient<Home>();
                     // Register other services
                 });

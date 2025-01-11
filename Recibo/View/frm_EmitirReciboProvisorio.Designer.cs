@@ -34,9 +34,6 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_EmitirReciboProvisorio));
-            btn_EmissaoReciboProvisorio = new Button();
-            btn_Recentes = new Button();
-            btn_Consulta = new Button();
             pnl_EmissaoReciboProvisorio = new Panel();
             btn_Excluir = new Button();
             btn_Editar = new Button();
@@ -62,70 +59,6 @@
             ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).BeginInit();
             SuspendLayout();
-            // 
-            // btn_EmissaoReciboProvisorio
-            // 
-            btn_EmissaoReciboProvisorio.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_EmissaoReciboProvisorio.BackColor = Color.FromArgb(33, 37, 41);
-            btn_EmissaoReciboProvisorio.BackgroundImageLayout = ImageLayout.None;
-            btn_EmissaoReciboProvisorio.Cursor = Cursors.Hand;
-            btn_EmissaoReciboProvisorio.FlatAppearance.BorderSize = 0;
-            btn_EmissaoReciboProvisorio.FlatAppearance.MouseDownBackColor = Color.FromArgb(33, 37, 41);
-            btn_EmissaoReciboProvisorio.FlatAppearance.MouseOverBackColor = Color.FromArgb(33, 37, 41);
-            btn_EmissaoReciboProvisorio.FlatStyle = FlatStyle.Flat;
-            btn_EmissaoReciboProvisorio.Font = new Font("JetBrains Mono Light", 12F);
-            btn_EmissaoReciboProvisorio.ForeColor = Color.FromArgb(206, 212, 218);
-            btn_EmissaoReciboProvisorio.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_EmissaoReciboProvisorio.Location = new Point(10, 10);
-            btn_EmissaoReciboProvisorio.Margin = new Padding(5);
-            btn_EmissaoReciboProvisorio.Name = "btn_EmissaoReciboProvisorio";
-            btn_EmissaoReciboProvisorio.Size = new Size(100, 45);
-            btn_EmissaoReciboProvisorio.TabIndex = 2;
-            btn_EmissaoReciboProvisorio.Text = "EMISSÃO";
-            btn_EmissaoReciboProvisorio.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btn_EmissaoReciboProvisorio.UseVisualStyleBackColor = false;
-            // 
-            // btn_Recentes
-            // 
-            btn_Recentes.BackColor = Color.FromArgb(52, 58, 64);
-            btn_Recentes.BackgroundImageLayout = ImageLayout.None;
-            btn_Recentes.Cursor = Cursors.Hand;
-            btn_Recentes.FlatAppearance.BorderSize = 0;
-            btn_Recentes.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
-            btn_Recentes.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
-            btn_Recentes.FlatStyle = FlatStyle.Flat;
-            btn_Recentes.Font = new Font("JetBrains Mono Light", 12F);
-            btn_Recentes.ForeColor = Color.FromArgb(206, 212, 218);
-            btn_Recentes.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Recentes.Location = new Point(120, 10);
-            btn_Recentes.Margin = new Padding(5);
-            btn_Recentes.Name = "btn_Recentes";
-            btn_Recentes.Size = new Size(100, 45);
-            btn_Recentes.TabIndex = 3;
-            btn_Recentes.Text = "RECENTES";
-            btn_Recentes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btn_Recentes.UseVisualStyleBackColor = false;
-            // 
-            // btn_Consulta
-            // 
-            btn_Consulta.BackColor = Color.FromArgb(52, 58, 64);
-            btn_Consulta.BackgroundImageLayout = ImageLayout.None;
-            btn_Consulta.Cursor = Cursors.Hand;
-            btn_Consulta.FlatAppearance.BorderSize = 0;
-            btn_Consulta.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
-            btn_Consulta.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
-            btn_Consulta.FlatStyle = FlatStyle.Flat;
-            btn_Consulta.Font = new Font("JetBrains Mono Light", 12F);
-            btn_Consulta.ForeColor = Color.FromArgb(206, 212, 218);
-            btn_Consulta.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Consulta.Location = new Point(230, 10);
-            btn_Consulta.Margin = new Padding(5);
-            btn_Consulta.Name = "btn_Consulta";
-            btn_Consulta.Size = new Size(100, 45);
-            btn_Consulta.TabIndex = 4;
-            btn_Consulta.Text = "CONSULTA";
-            btn_Consulta.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btn_Consulta.UseVisualStyleBackColor = false;
             // 
             // pnl_EmissaoReciboProvisorio
             // 
@@ -260,6 +193,7 @@
             dgv_ReciboProvisorioAtos.EnableHeadersVisualStyles = false;
             dgv_ReciboProvisorioAtos.ImeMode = ImeMode.Off;
             dgv_ReciboProvisorioAtos.Location = new Point(210, 62);
+            dgv_ReciboProvisorioAtos.MultiSelect = false;
             dgv_ReciboProvisorioAtos.Name = "dgv_ReciboProvisorioAtos";
             dgv_ReciboProvisorioAtos.ReadOnly = true;
             dgv_ReciboProvisorioAtos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -272,12 +206,14 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgv_ReciboProvisorioAtos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgv_ReciboProvisorioAtos.RowHeadersVisible = false;
+            dgv_ReciboProvisorioAtos.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle4.Font = new Font("JetBrains Mono Light", 9.75F);
             dataGridViewCellStyle4.ForeColor = Color.FromArgb(222, 226, 230);
             dataGridViewCellStyle4.SelectionBackColor = Color.OliveDrab;
             dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(222, 226, 230);
             dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgv_ReciboProvisorioAtos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ReciboProvisorioAtos.Size = new Size(552, 389);
             dgv_ReciboProvisorioAtos.TabIndex = 13;
             dgv_ReciboProvisorioAtos.CellClick += dgv_ReciboProvisorioAtos_CellClick;
@@ -485,9 +421,6 @@
             ClientSize = new Size(784, 526);
             Controls.Add(lbl_IdRecibo);
             Controls.Add(pnl_EmissaoReciboProvisorio);
-            Controls.Add(btn_Consulta);
-            Controls.Add(btn_Recentes);
-            Controls.Add(btn_EmissaoReciboProvisorio);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frm_EmitirReciboProvisorio";
@@ -502,10 +435,6 @@
         }
 
         #endregion
-
-        private Button btn_EmissaoReciboProvisorio;
-        private Button btn_Recentes;
-        private Button btn_Consulta;
         private Panel pnl_EmissaoReciboProvisorio;
         private Label lbl_Requerente;
         private Label lbl_Cpf;

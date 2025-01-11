@@ -30,6 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             pnl_Principal = new Panel();
+            btn_ReciboProvisorioConsulta = new Button();
+            btn_ReciboProvisorioRecentes = new Button();
+            lbl_ReciboProvisorio = new Label();
+            btn_ReciboDefinitivoConsulta = new Button();
+            btn_ReciboDefinitivoRecentes = new Button();
+            lbl_ReciboDefinitivo = new Label();
             btn_Sair = new Button();
             btn_Atos = new Button();
             btn_ReciboProvisorio = new Button();
@@ -48,6 +54,12 @@
             // pnl_Principal
             // 
             pnl_Principal.BackColor = Color.FromArgb(108, 117, 125);
+            pnl_Principal.Controls.Add(btn_ReciboProvisorioConsulta);
+            pnl_Principal.Controls.Add(btn_ReciboProvisorioRecentes);
+            pnl_Principal.Controls.Add(lbl_ReciboProvisorio);
+            pnl_Principal.Controls.Add(btn_ReciboDefinitivoConsulta);
+            pnl_Principal.Controls.Add(btn_ReciboDefinitivoRecentes);
+            pnl_Principal.Controls.Add(lbl_ReciboDefinitivo);
             pnl_Principal.Controls.Add(btn_Sair);
             pnl_Principal.Controls.Add(btn_Atos);
             pnl_Principal.Controls.Add(btn_ReciboProvisorio);
@@ -58,6 +70,113 @@
             pnl_Principal.Name = "pnl_Principal";
             pnl_Principal.Size = new Size(200, 526);
             pnl_Principal.TabIndex = 0;
+            // 
+            // btn_ReciboProvisorioConsulta
+            // 
+            btn_ReciboProvisorioConsulta.BackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboProvisorioConsulta.BackgroundImageLayout = ImageLayout.None;
+            btn_ReciboProvisorioConsulta.Cursor = Cursors.Hand;
+            btn_ReciboProvisorioConsulta.FlatAppearance.BorderSize = 0;
+            btn_ReciboProvisorioConsulta.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboProvisorioConsulta.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_ReciboProvisorioConsulta.FlatStyle = FlatStyle.Flat;
+            btn_ReciboProvisorioConsulta.Font = new Font("JetBrains Mono Light", 12F);
+            btn_ReciboProvisorioConsulta.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_ReciboProvisorioConsulta.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboProvisorioConsulta.Location = new Point(0, 363);
+            btn_ReciboProvisorioConsulta.Name = "btn_ReciboProvisorioConsulta";
+            btn_ReciboProvisorioConsulta.Size = new Size(200, 45);
+            btn_ReciboProvisorioConsulta.TabIndex = 10;
+            btn_ReciboProvisorioConsulta.Text = "CONSULTA";
+            btn_ReciboProvisorioConsulta.TextAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboProvisorioConsulta.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_ReciboProvisorioConsulta.UseVisualStyleBackColor = false;
+            // 
+            // btn_ReciboProvisorioRecentes
+            // 
+            btn_ReciboProvisorioRecentes.BackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboProvisorioRecentes.BackgroundImageLayout = ImageLayout.None;
+            btn_ReciboProvisorioRecentes.Cursor = Cursors.Hand;
+            btn_ReciboProvisorioRecentes.FlatAppearance.BorderSize = 0;
+            btn_ReciboProvisorioRecentes.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboProvisorioRecentes.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_ReciboProvisorioRecentes.FlatStyle = FlatStyle.Flat;
+            btn_ReciboProvisorioRecentes.Font = new Font("JetBrains Mono Light", 12F);
+            btn_ReciboProvisorioRecentes.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_ReciboProvisorioRecentes.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboProvisorioRecentes.Location = new Point(0, 312);
+            btn_ReciboProvisorioRecentes.Name = "btn_ReciboProvisorioRecentes";
+            btn_ReciboProvisorioRecentes.Size = new Size(200, 45);
+            btn_ReciboProvisorioRecentes.TabIndex = 9;
+            btn_ReciboProvisorioRecentes.Text = "RECENTES";
+            btn_ReciboProvisorioRecentes.TextAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboProvisorioRecentes.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_ReciboProvisorioRecentes.UseVisualStyleBackColor = false;
+            btn_ReciboProvisorioRecentes.Click += btn_ReciboProvisorioRecentes_Click;
+            // 
+            // lbl_ReciboProvisorio
+            // 
+            lbl_ReciboProvisorio.AutoSize = true;
+            lbl_ReciboProvisorio.Font = new Font("JetBrains Mono", 12F, FontStyle.Bold);
+            lbl_ReciboProvisorio.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_ReciboProvisorio.Location = new Point(12, 237);
+            lbl_ReciboProvisorio.Name = "lbl_ReciboProvisorio";
+            lbl_ReciboProvisorio.Size = new Size(180, 21);
+            lbl_ReciboProvisorio.TabIndex = 8;
+            lbl_ReciboProvisorio.Text = "RECIBO PROVISÓRIO";
+            // 
+            // btn_ReciboDefinitivoConsulta
+            // 
+            btn_ReciboDefinitivoConsulta.BackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboDefinitivoConsulta.BackgroundImageLayout = ImageLayout.None;
+            btn_ReciboDefinitivoConsulta.Cursor = Cursors.Hand;
+            btn_ReciboDefinitivoConsulta.FlatAppearance.BorderSize = 0;
+            btn_ReciboDefinitivoConsulta.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboDefinitivoConsulta.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_ReciboDefinitivoConsulta.FlatStyle = FlatStyle.Flat;
+            btn_ReciboDefinitivoConsulta.Font = new Font("JetBrains Mono Light", 12F);
+            btn_ReciboDefinitivoConsulta.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_ReciboDefinitivoConsulta.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboDefinitivoConsulta.Location = new Point(0, 189);
+            btn_ReciboDefinitivoConsulta.Name = "btn_ReciboDefinitivoConsulta";
+            btn_ReciboDefinitivoConsulta.Size = new Size(200, 45);
+            btn_ReciboDefinitivoConsulta.TabIndex = 7;
+            btn_ReciboDefinitivoConsulta.Text = "CONSULTA";
+            btn_ReciboDefinitivoConsulta.TextAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboDefinitivoConsulta.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_ReciboDefinitivoConsulta.UseVisualStyleBackColor = false;
+            // 
+            // btn_ReciboDefinitivoRecentes
+            // 
+            btn_ReciboDefinitivoRecentes.BackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboDefinitivoRecentes.BackgroundImageLayout = ImageLayout.None;
+            btn_ReciboDefinitivoRecentes.Cursor = Cursors.Hand;
+            btn_ReciboDefinitivoRecentes.FlatAppearance.BorderSize = 0;
+            btn_ReciboDefinitivoRecentes.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_ReciboDefinitivoRecentes.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_ReciboDefinitivoRecentes.FlatStyle = FlatStyle.Flat;
+            btn_ReciboDefinitivoRecentes.Font = new Font("JetBrains Mono Light", 12F);
+            btn_ReciboDefinitivoRecentes.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_ReciboDefinitivoRecentes.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboDefinitivoRecentes.Location = new Point(0, 138);
+            btn_ReciboDefinitivoRecentes.Name = "btn_ReciboDefinitivoRecentes";
+            btn_ReciboDefinitivoRecentes.Size = new Size(200, 45);
+            btn_ReciboDefinitivoRecentes.TabIndex = 6;
+            btn_ReciboDefinitivoRecentes.Text = "RECENTES";
+            btn_ReciboDefinitivoRecentes.TextAlign = ContentAlignment.MiddleLeft;
+            btn_ReciboDefinitivoRecentes.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_ReciboDefinitivoRecentes.UseVisualStyleBackColor = false;
+            // 
+            // lbl_ReciboDefinitivo
+            // 
+            lbl_ReciboDefinitivo.AutoSize = true;
+            lbl_ReciboDefinitivo.Font = new Font("JetBrains Mono", 12F, FontStyle.Bold);
+            lbl_ReciboDefinitivo.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_ReciboDefinitivo.Location = new Point(12, 63);
+            lbl_ReciboDefinitivo.Name = "lbl_ReciboDefinitivo";
+            lbl_ReciboDefinitivo.Size = new Size(180, 21);
+            lbl_ReciboDefinitivo.TabIndex = 5;
+            lbl_ReciboDefinitivo.Text = "RECIBO DEFINITIVO";
             // 
             // btn_Sair
             // 
@@ -71,7 +190,7 @@
             btn_Sair.Font = new Font("JetBrains Mono Light", 12F);
             btn_Sair.ForeColor = Color.FromArgb(206, 212, 218);
             btn_Sair.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Sair.Location = new Point(1, 215);
+            btn_Sair.Location = new Point(0, 478);
             btn_Sair.Name = "btn_Sair";
             btn_Sair.Size = new Size(200, 45);
             btn_Sair.TabIndex = 4;
@@ -93,7 +212,7 @@
             btn_Atos.Font = new Font("JetBrains Mono Light", 12F);
             btn_Atos.ForeColor = Color.FromArgb(206, 212, 218);
             btn_Atos.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Atos.Location = new Point(0, 165);
+            btn_Atos.Location = new Point(0, 427);
             btn_Atos.Name = "btn_Atos";
             btn_Atos.Size = new Size(200, 45);
             btn_Atos.TabIndex = 3;
@@ -115,11 +234,11 @@
             btn_ReciboProvisorio.Font = new Font("JetBrains Mono Light", 12F);
             btn_ReciboProvisorio.ForeColor = Color.FromArgb(206, 212, 218);
             btn_ReciboProvisorio.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_ReciboProvisorio.Location = new Point(0, 115);
+            btn_ReciboProvisorio.Location = new Point(0, 261);
             btn_ReciboProvisorio.Name = "btn_ReciboProvisorio";
             btn_ReciboProvisorio.Size = new Size(200, 45);
             btn_ReciboProvisorio.TabIndex = 2;
-            btn_ReciboProvisorio.Text = "RECIBO PROVISÓRIO";
+            btn_ReciboProvisorio.Text = "EMISSÃO";
             btn_ReciboProvisorio.TextAlign = ContentAlignment.MiddleLeft;
             btn_ReciboProvisorio.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_ReciboProvisorio.UseVisualStyleBackColor = false;
@@ -137,11 +256,11 @@
             btn_ReciboDefinitivo.Font = new Font("JetBrains Mono Light", 12F);
             btn_ReciboDefinitivo.ForeColor = Color.FromArgb(206, 212, 218);
             btn_ReciboDefinitivo.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_ReciboDefinitivo.Location = new Point(0, 65);
+            btn_ReciboDefinitivo.Location = new Point(0, 87);
             btn_ReciboDefinitivo.Name = "btn_ReciboDefinitivo";
             btn_ReciboDefinitivo.Size = new Size(200, 45);
             btn_ReciboDefinitivo.TabIndex = 1;
-            btn_ReciboDefinitivo.Text = "RECIBO DEFINITIVO";
+            btn_ReciboDefinitivo.Text = "EMISSÃO";
             btn_ReciboDefinitivo.TextAlign = ContentAlignment.MiddleLeft;
             btn_ReciboDefinitivo.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_ReciboDefinitivo.UseVisualStyleBackColor = false;
@@ -226,6 +345,7 @@
             Text = "Recibos";
             Load += Recibo_Load;
             pnl_Principal.ResumeLayout(false);
+            pnl_Principal.PerformLayout();
             pnl_Logo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pic_Logo).EndInit();
             pnl_Form.ResumeLayout(false);
@@ -245,5 +365,11 @@
         private Label lbl_Home;
         private Label label1;
         private Button btn_Sair;
+        private Label lbl_ReciboProvisorio;
+        private Button btn_ReciboDefinitivoConsulta;
+        private Button btn_ReciboDefinitivoRecentes;
+        private Label lbl_ReciboDefinitivo;
+        private Button btn_ReciboProvisorioConsulta;
+        private Button btn_ReciboProvisorioRecentes;
     }
 }

@@ -108,5 +108,12 @@ namespace Recibo
             ActiveButton(btn_Atos);
             FormShow(new frm_Atos());
         }
+
+        private void btn_ReciboProvisorioRecentes_Click(object sender, EventArgs e)
+        {
+            ActiveButton(btn_ReciboProvisorioRecentes);
+            var context = _serviceProvider.GetRequiredService<recibos_dbContext>();
+            FormShow(new frm_RecentesReciboProvisorio(context));
+        }
     }
 }

@@ -25,6 +25,12 @@
     <Compile Update="View\frm_Atos.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\frm_ReciboProvisorioConsultado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\frm_RecentesReciboProvisorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

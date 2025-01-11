@@ -27,6 +27,9 @@ public partial class ReciboProvisorio
     [StringLength(11)]
     public string Cpf { get; set; }
 
+    [NotMapped]
+    public decimal Total => ReciboProvisorioAtos.Sum(a => a.Total);
+
     [InverseProperty("ReciboProvisorio")]
     public virtual ICollection<ReciboProvisorioAto> ReciboProvisorioAtos { get; set; } = new List<ReciboProvisorioAto>();
 
