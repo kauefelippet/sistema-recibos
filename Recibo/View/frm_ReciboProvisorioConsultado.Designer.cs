@@ -190,7 +190,6 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frm_ReciboProvisorioConsultado";
-            Text = "frm_ConsultarReciboProvisorio";
             Load += frm_ConsultarReciboProvisorio_Load;
             pnl_RecentesReciboProvisorio.ResumeLayout(false);
             pnl_RecentesReciboProvisorio.PerformLayout();

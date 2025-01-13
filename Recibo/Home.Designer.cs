@@ -91,6 +91,7 @@
             btn_ReciboProvisorioConsulta.TextAlign = ContentAlignment.MiddleLeft;
             btn_ReciboProvisorioConsulta.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_ReciboProvisorioConsulta.UseVisualStyleBackColor = false;
+            btn_ReciboProvisorioConsulta.Click += btn_ReciboProvisorioConsulta_Click;
             // 
             // btn_ReciboProvisorioRecentes
             // 
