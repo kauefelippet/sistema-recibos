@@ -72,13 +72,27 @@ namespace Recibo.View
             List<ReciboProvisorio> reciboProvisorio = new();
 
             // Identify which of the textboxes has been filled
-            if (txtbox_Requerente.Text != "")
+            if (!string.IsNullOrEmpty(txtbox_ID.Text))
+            {
+                if (int.TryParse(txtbox_ID.Text, out int id))
+                {
+                    reciboProvisorio = _context.RecibosProvisorios
+                        .Where(r => r.Id == id)
+                        .ToList();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid ID.");
+                    return;
+                }
+            }
+            else if (!string.IsNullOrEmpty(txtbox_Requerente.Text))
             {
                 reciboProvisorio = _context.RecibosProvisorios
                     .Where(r => r.Requerente.Contains(txtbox_Requerente.Text))
                     .ToList();
             }
-            else if (txtbox_CPF.Text != "")
+            else if (!string.IsNullOrEmpty(txtbox_CPF.Text))
             {
                 // Remove special characters from CPF
                 var cpf = txtbox_CPF.Text.Replace(".", "").Replace("-", "");
@@ -93,15 +107,6 @@ namespace Recibo.View
                 reciboProvisorio = _context.RecibosProvisorios
                     .Where(r => r.Data.HasValue && r.Data.Value.Date == selectedDate)
                     .ToList();
-            }
-            else if (txtbox_ID.Text != "")
-            {
-                if (int.TryParse(txtbox_ID.Text, out int id))
-                {
-                    reciboProvisorio = _context.RecibosProvisorios
-                        .Where(r => r.Id == id)
-                        .ToList();
-                }
             }
 
             // Bind the RecibosProvisorios to the DataGridView
