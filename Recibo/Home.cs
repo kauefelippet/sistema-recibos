@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Recibo.Models;
+using Recibo.Util;
 using Recibo.View;
 using Recibo.ViewModel;
 
@@ -100,7 +101,8 @@ namespace Recibo
             ActiveButton(btn_ReciboProvisorio);
             var reciboProvisorioVM = _serviceProvider.GetRequiredService<ReciboProvisorioVM>();
             var context = _serviceProvider.GetRequiredService<recibos_dbContext>();
-            FormShow(new frm_EmitirReciboProvisorio(reciboProvisorioVM, context));
+            var pdfService = _serviceProvider.GetRequiredService<PdfService>();
+            FormShow(new frm_EmitirReciboProvisorio(reciboProvisorioVM, context, pdfService));
         }
 
         private void btn_Atos_Click(object sender, EventArgs e)

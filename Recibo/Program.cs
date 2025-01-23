@@ -2,9 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using QuestPDF.Infrastructure;
 using Recibo.Models;
 using Recibo.View;
 using Recibo.ViewModel;
+using Recibo.Util;
+using QuestPDF.Companion;
 
 namespace Recibo
 {
@@ -16,13 +19,17 @@ namespace Recibo
         [STAThread]
         static void Main()
         {
+            QuestPDF.Settings.License = LicenseType.Community;
+
             var host = CreateHostBuilder().Build();
 
-            // Ensure the application configuration is initialized
             ApplicationConfiguration.Initialize();
 
-            // Run the application
             Application.Run(host.Services.GetRequiredService<Home>());
+
+            ReciboProvisorio reciboProvisorio = new();
+            ReciboProvisorioPdfDocument _reciboProvisorioPdfDocument = new(reciboProvisorio);
+            _reciboProvisorioPdfDocument.ShowInCompanion();
         }
 
         static IHostBuilder CreateHostBuilder() =>
@@ -32,7 +39,6 @@ namespace Recibo
                     logging.ClearProviders();
                     logging.AddConsole();
                     logging.AddDebug();
-                    // Add other logging providers as needed
                 })
                 .ConfigureServices((context, services) =>
                 {
@@ -41,8 +47,8 @@ namespace Recibo
                     services.AddTransient<ReciboProvisorioVM>();
                     services.AddTransient<frm_EmitirReciboProvisorio>();
                     services.AddTransient<frm_RecentesReciboProvisorio>();
+                    services.AddTransient<PdfService>();
                     services.AddTransient<Home>();
-                    // Register other services
                 });
     }
 }

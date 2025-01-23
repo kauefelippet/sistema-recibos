@@ -18,13 +18,15 @@ namespace Recibo.View
         private ReciboProvisorioVM _reciboProvisorioVM;
         private recibos_dbContext _context;
         private BindingSource _bindingSource = new();
+        private readonly PdfService _pdfService;
         private int selectedRowIndex;
 
-        public frm_EmitirReciboProvisorio(ReciboProvisorioVM reciboProvisorioVM, recibos_dbContext context)
+        public frm_EmitirReciboProvisorio(ReciboProvisorioVM reciboProvisorioVM, recibos_dbContext context, PdfService pdfService)
         {
             InitializeComponent();
             _reciboProvisorioVM = reciboProvisorioVM;
             _context = context;
+            _pdfService = pdfService;
             BindData();
         }
 
@@ -121,6 +123,14 @@ namespace Recibo.View
                 _reciboProvisorioVM.Cpf = txtbox_CPF.Text.Replace(".", "").Replace("-", "");
 
                 _reciboProvisorioVM.SaveChanges();
+
+                // Generate the PDF file
+                int reciboProvisorioId = _context.RecibosProvisorios.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+                string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"ReciboProvisorio_{reciboProvisorioId}.pdf");
+
+                _pdfService.GenerateReciboProvisorioPdf(reciboProvisorioId, outputPath);
+
+                MessageBox.Show("PDF gerado com sucesso!", "Emissão bem sucedida", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 RefreshForm();
             }
