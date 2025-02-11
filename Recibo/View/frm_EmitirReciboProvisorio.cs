@@ -75,7 +75,7 @@ namespace Recibo.View
         {
             var latestReciboProvisorio = _context.RecibosProvisorios.OrderByDescending(r => r.Id).FirstOrDefault();
             int nextReciboProvisorioId = latestReciboProvisorio != null ? latestReciboProvisorio.Id + 1 : 1;
-            lbl_IdRecibo.Text = "Recibo nº " + nextReciboProvisorioId;
+            lbl_IdRecibo.Text = "Recibo Provisório nº " + nextReciboProvisorioId;
         }
 
         private void btn_Adicionar_Click(object sender, EventArgs e)

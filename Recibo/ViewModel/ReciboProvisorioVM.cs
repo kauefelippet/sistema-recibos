@@ -9,7 +9,7 @@ namespace Recibo.ViewModel
     public class ReciboProvisorioVM
     {
         private readonly recibos_dbContext _context;
-        private readonly Models.Recibo _reciboProvisorio;
+        private readonly ReciboProvisorio _reciboProvisorio;
         private readonly ILogger<ReciboProvisorioVM> _logger;
 
 
@@ -27,7 +27,7 @@ namespace Recibo.ViewModel
         public ReciboProvisorioVM(ILogger<ReciboProvisorioVM> logger)
         {
             _context = new recibos_dbContext();
-            _reciboProvisorio = new Models.Recibo();
+            _reciboProvisorio = new ReciboProvisorio { Data = DateTime.Now };
             Requerente = string.Empty;
             Cpf = string.Empty;
             _logger = logger;

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Recibo.Models;
 
 [Table("recibos_provisorios")]
-public partial class Recibo
+public partial class ReciboProvisorio
 {
     [Key]
     [Column("id")]

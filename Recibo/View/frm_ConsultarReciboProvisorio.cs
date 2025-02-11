@@ -69,7 +69,7 @@ namespace Recibo.View
 
         private void BindReciboProvisorioData()
         {
-            List<Models.Recibo> reciboProvisorio = new();
+            List<ReciboProvisorio> reciboProvisorio = new();
 
             // Identify which of the textboxes has been filled
             if (!string.IsNullOrEmpty(txtbox_ID.Text))

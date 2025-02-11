@@ -26,7 +26,7 @@ public partial class recibos_dbContext : DbContext
 
     public virtual DbSet<ReciboProvisorioAto> ReciboProvisorioAtos { get; set; }
 
-    public virtual DbSet<Recibo> RecibosProvisorios { get; set; }
+    public virtual DbSet<ReciboProvisorio> RecibosProvisorios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql("server=localhost;port=3307;database=recibos_db;uid=root;pwd=secret", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.39-mysql"));
@@ -40,50 +40,50 @@ public partial class recibos_dbContext : DbContext
         modelBuilder.Entity<Ato>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
             entity.Property(e => e.Codigo).IsFixedLength();
         });
 
         modelBuilder.Entity<ReciboDefinitivo>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.Property(e => e.Data).HasDefaultValueSql("CURRENT_TIMESTAMP");
-
+            entity.Property(e => e.Data)
+                  .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                  .HasConversion(
+                      v => v,
+                      v => DateTime.SpecifyKind((DateTime)v, DateTimeKind.Local));
             entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.Recibos).HasConstraintName("recibos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboAto>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
             entity.HasOne(d => d.Ato).WithMany(p => p.ReciboAtos)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("recibo_atos_ibfk_2");
-
+                  .OnDelete(DeleteBehavior.Cascade)
+                  .HasConstraintName("recibo_atos_ibfk_2");
             entity.HasOne(d => d.Recibo).WithMany(p => p.ReciboAtos)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("recibo_atos_ibfk_1");
+                  .OnDelete(DeleteBehavior.Cascade)
+                  .HasConstraintName("recibo_atos_ibfk_1");
         });
 
         modelBuilder.Entity<ReciboProvisorioAto>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
             entity.HasOne(d => d.Ato).WithMany(p => p.ReciboProvisorioAtos)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("recibo_provisorio_atos_ibfk_2");
-
+                  .OnDelete(DeleteBehavior.Cascade)
+                  .HasConstraintName("recibo_provisorio_atos_ibfk_2");
             entity.HasOne(d => d.ReciboProvisorio).WithMany(p => p.ReciboProvisorioAtos)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("recibo_provisorio_atos_ibfk_1");
+                  .OnDelete(DeleteBehavior.Cascade)
+                  .HasConstraintName("recibo_provisorio_atos_ibfk_1");
         });
 
-        modelBuilder.Entity<Recibo>(entity =>
+        modelBuilder.Entity<ReciboProvisorio>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.Property(e => e.Data).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.Data)
+                  .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                  .HasConversion(
+                      v => v,
+                      v => DateTime.SpecifyKind((DateTime)v, DateTimeKind.Local));
         });
 
         OnModelCreatingPartial(modelBuilder);

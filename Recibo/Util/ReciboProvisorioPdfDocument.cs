@@ -7,9 +7,9 @@ namespace Recibo.Util
 {
     public class ReciboProvisorioPdfDocument : IDocument
     {
-        private readonly Models.Recibo _reciboProvisorio;
+        private readonly ReciboProvisorio _reciboProvisorio;
 
-        public ReciboProvisorioPdfDocument(Models.Recibo reciboProvisorio)
+        public ReciboProvisorioPdfDocument(ReciboProvisorio reciboProvisorio)
         {
             _reciboProvisorio = reciboProvisorio;
         }
