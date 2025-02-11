@@ -30,6 +30,12 @@ public partial class ReciboAto
     [Column("quantidade")]
     public int Quantidade { get; set; }
 
+    [NotMapped]
+    public string AtoNome => Ato?.Nome;
+
+    [NotMapped]
+    public decimal Total => Ato.Total * Quantidade;
+
     [ForeignKey("AtoId")]
     [InverseProperty("ReciboAtos")]
     public virtual Ato Ato { get; set; }

@@ -50,7 +50,10 @@ namespace Recibo
         private void btn_ReciboDefinitivo_Click(object sender, EventArgs e)
         {
             ActiveButton(btn_ReciboDefinitivo);
-            // implementar e chamar a tela de ReciboDefinitivo
+            var reciboDefinitivoVM = _serviceProvider.GetRequiredService<ReciboDefinitivoVM>();
+            var context = _serviceProvider.GetRequiredService<recibos_dbContext>();
+            var pdfService = _serviceProvider.GetRequiredService<PdfService>();
+            FormShow(new frm_EmitirReciboDefinitivo(reciboDefinitivoVM, context, pdfService));
         }
 
         private void Recibo_Load(object sender, EventArgs e)

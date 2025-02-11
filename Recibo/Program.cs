@@ -44,7 +44,9 @@ namespace Recibo
                 {
                     services.AddDbContext<recibos_dbContext>(options =>
                         options.UseMySql("server=localhost;port=3307;database=recibos_db;uid=root;pwd=secret", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.39-mysql")));
+                    services.AddTransient<ReciboDefinitivoVM>();
                     services.AddTransient<ReciboProvisorioVM>();
+                    services.AddTransient<frm_EmitirReciboDefinitivo>();
                     services.AddTransient<frm_EmitirReciboProvisorio>();
                     services.AddTransient<frm_RecentesReciboProvisorio>();
                     services.AddTransient<PdfService>();

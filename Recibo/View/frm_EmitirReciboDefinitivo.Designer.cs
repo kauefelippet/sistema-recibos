@@ -1,6 +1,6 @@
 ﻿namespace Recibo.View
 {
-    partial class frm_EmitirReciboProvisorio
+    partial class frm_EmitirReciboDefinitivo
     {
         /// <summary>
         /// Required designer variable.
@@ -33,14 +33,14 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_EmitirReciboProvisorio));
-            pnl_EmissaoReciboProvisorio = new Panel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_EmitirReciboDefinitivo));
+            pnl_EmissaoRecibo = new Panel();
             btn_Excluir = new Button();
             btn_Editar = new Button();
             lbl_ValorQuantidade = new Label();
             lbl_TotalRecibo = new Label();
             lbl_NomeAto = new Label();
-            dgv_ReciboProvisorioAtos = new DataGridView();
+            dgv_ReciboAtos = new DataGridView();
             btn_Salvar = new Button();
             btn_Adicionar = new Button();
             txtbox_Quantidade = new TextBox();
@@ -55,35 +55,38 @@
             lbl_Requerente = new Label();
             reciboProvisorioAtoBindingSource = new BindingSource(components);
             lbl_IdRecibo = new Label();
-            pnl_EmissaoReciboProvisorio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).BeginInit();
+            lbl_IdReciboProvisorio = new Label();
+            txtbox_IdReciboProvisorio = new TextBox();
+            btn_Vincular = new Button();
+            pnl_EmissaoRecibo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_ReciboAtos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // pnl_EmissaoReciboProvisorio
+            // pnl_EmissaoRecibo
             // 
-            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Excluir);
-            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Editar);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_ValorQuantidade);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_TotalRecibo);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_NomeAto);
-            pnl_EmissaoReciboProvisorio.Controls.Add(dgv_ReciboProvisorioAtos);
-            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Salvar);
-            pnl_EmissaoReciboProvisorio.Controls.Add(btn_Adicionar);
-            pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_Quantidade);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_Quantidade);
-            pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_Descricao);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_DescricaoAto);
-            pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_CodigoAto);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_CodigoAto);
-            pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_CPF);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_Cpf);
-            pnl_EmissaoReciboProvisorio.Controls.Add(txtbox_Requerente);
-            pnl_EmissaoReciboProvisorio.Controls.Add(lbl_Requerente);
-            pnl_EmissaoReciboProvisorio.Location = new Point(10, 63);
-            pnl_EmissaoReciboProvisorio.Name = "pnl_EmissaoReciboProvisorio";
-            pnl_EmissaoReciboProvisorio.Size = new Size(762, 451);
-            pnl_EmissaoReciboProvisorio.TabIndex = 5;
+            pnl_EmissaoRecibo.Controls.Add(btn_Excluir);
+            pnl_EmissaoRecibo.Controls.Add(btn_Editar);
+            pnl_EmissaoRecibo.Controls.Add(lbl_ValorQuantidade);
+            pnl_EmissaoRecibo.Controls.Add(lbl_TotalRecibo);
+            pnl_EmissaoRecibo.Controls.Add(lbl_NomeAto);
+            pnl_EmissaoRecibo.Controls.Add(dgv_ReciboAtos);
+            pnl_EmissaoRecibo.Controls.Add(btn_Salvar);
+            pnl_EmissaoRecibo.Controls.Add(btn_Adicionar);
+            pnl_EmissaoRecibo.Controls.Add(txtbox_Quantidade);
+            pnl_EmissaoRecibo.Controls.Add(lbl_Quantidade);
+            pnl_EmissaoRecibo.Controls.Add(txtbox_Descricao);
+            pnl_EmissaoRecibo.Controls.Add(lbl_DescricaoAto);
+            pnl_EmissaoRecibo.Controls.Add(txtbox_CodigoAto);
+            pnl_EmissaoRecibo.Controls.Add(lbl_CodigoAto);
+            pnl_EmissaoRecibo.Controls.Add(txtbox_CPF);
+            pnl_EmissaoRecibo.Controls.Add(lbl_Cpf);
+            pnl_EmissaoRecibo.Controls.Add(txtbox_Requerente);
+            pnl_EmissaoRecibo.Controls.Add(lbl_Requerente);
+            pnl_EmissaoRecibo.Location = new Point(10, 63);
+            pnl_EmissaoRecibo.Name = "pnl_EmissaoRecibo";
+            pnl_EmissaoRecibo.Size = new Size(762, 451);
+            pnl_EmissaoRecibo.TabIndex = 5;
             // 
             // btn_Excluir
             // 
@@ -160,17 +163,17 @@
             lbl_NomeAto.Size = new Size(168, 21);
             lbl_NomeAto.TabIndex = 14;
             // 
-            // dgv_ReciboProvisorioAtos
+            // dgv_ReciboAtos
             // 
-            dgv_ReciboProvisorioAtos.AccessibleRole = AccessibleRole.List;
-            dgv_ReciboProvisorioAtos.AllowUserToAddRows = false;
-            dgv_ReciboProvisorioAtos.AllowUserToDeleteRows = false;
-            dgv_ReciboProvisorioAtos.AllowUserToResizeRows = false;
-            dgv_ReciboProvisorioAtos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv_ReciboProvisorioAtos.BackgroundColor = Color.FromArgb(73, 80, 87);
-            dgv_ReciboProvisorioAtos.BorderStyle = BorderStyle.None;
-            dgv_ReciboProvisorioAtos.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgv_ReciboProvisorioAtos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgv_ReciboAtos.AccessibleRole = AccessibleRole.List;
+            dgv_ReciboAtos.AllowUserToAddRows = false;
+            dgv_ReciboAtos.AllowUserToDeleteRows = false;
+            dgv_ReciboAtos.AllowUserToResizeRows = false;
+            dgv_ReciboAtos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_ReciboAtos.BackgroundColor = Color.FromArgb(73, 80, 87);
+            dgv_ReciboAtos.BorderStyle = BorderStyle.None;
+            dgv_ReciboAtos.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgv_ReciboAtos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle1.Font = new Font("JetBrains Mono Light", 9.75F);
@@ -178,8 +181,8 @@
             dataGridViewCellStyle1.SelectionBackColor = Color.OliveDrab;
             dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(222, 226, 230);
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgv_ReciboProvisorioAtos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgv_ReciboProvisorioAtos.ColumnHeadersHeight = 20;
+            dgv_ReciboAtos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgv_ReciboAtos.ColumnHeadersHeight = 20;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle2.Font = new Font("JetBrains Mono Light", 9.75F);
@@ -187,16 +190,16 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.OliveDrab;
             dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(222, 226, 230);
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_ReciboProvisorioAtos.DefaultCellStyle = dataGridViewCellStyle2;
-            dgv_ReciboProvisorioAtos.Dock = DockStyle.Fill;
-            dgv_ReciboProvisorioAtos.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgv_ReciboProvisorioAtos.EnableHeadersVisualStyles = false;
-            dgv_ReciboProvisorioAtos.ImeMode = ImeMode.Off;
-            dgv_ReciboProvisorioAtos.Location = new Point(210, 62);
-            dgv_ReciboProvisorioAtos.MultiSelect = false;
-            dgv_ReciboProvisorioAtos.Name = "dgv_ReciboProvisorioAtos";
-            dgv_ReciboProvisorioAtos.ReadOnly = true;
-            dgv_ReciboProvisorioAtos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgv_ReciboAtos.DefaultCellStyle = dataGridViewCellStyle2;
+            dgv_ReciboAtos.Dock = DockStyle.Fill;
+            dgv_ReciboAtos.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgv_ReciboAtos.EnableHeadersVisualStyles = false;
+            dgv_ReciboAtos.ImeMode = ImeMode.Off;
+            dgv_ReciboAtos.Location = new Point(210, 62);
+            dgv_ReciboAtos.MultiSelect = false;
+            dgv_ReciboAtos.Name = "dgv_ReciboAtos";
+            dgv_ReciboAtos.ReadOnly = true;
+            dgv_ReciboAtos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle3.Font = new Font("JetBrains Mono Light", 9.75F);
@@ -204,19 +207,19 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.OliveDrab;
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(222, 226, 230);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgv_ReciboProvisorioAtos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dgv_ReciboProvisorioAtos.RowHeadersVisible = false;
-            dgv_ReciboProvisorioAtos.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv_ReciboAtos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgv_ReciboAtos.RowHeadersVisible = false;
+            dgv_ReciboAtos.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle4.Font = new Font("JetBrains Mono Light", 9.75F);
             dataGridViewCellStyle4.ForeColor = Color.FromArgb(222, 226, 230);
             dataGridViewCellStyle4.SelectionBackColor = Color.OliveDrab;
             dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(222, 226, 230);
-            dgv_ReciboProvisorioAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dgv_ReciboProvisorioAtos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_ReciboProvisorioAtos.Size = new Size(552, 389);
-            dgv_ReciboProvisorioAtos.TabIndex = 13;
-            dgv_ReciboProvisorioAtos.CellClick += dgv_ReciboProvisorioAtos_CellClick;
+            dgv_ReciboAtos.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgv_ReciboAtos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_ReciboAtos.Size = new Size(552, 389);
+            dgv_ReciboAtos.TabIndex = 13;
+            dgv_ReciboAtos.CellClick += dgv_ReciboAtos_CellClick;
             // 
             // btn_Salvar
             // 
@@ -407,35 +410,85 @@
             lbl_IdRecibo.AutoSize = true;
             lbl_IdRecibo.Font = new Font("JetBrains Mono Light", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbl_IdRecibo.ForeColor = Color.FromArgb(206, 212, 218);
-            lbl_IdRecibo.Location = new Point(562, 22);
+            lbl_IdRecibo.Location = new Point(632, 22);
             lbl_IdRecibo.Name = "lbl_IdRecibo";
-            lbl_IdRecibo.Size = new Size(210, 21);
+            lbl_IdRecibo.Size = new Size(100, 21);
             lbl_IdRecibo.TabIndex = 14;
-            lbl_IdRecibo.Text = "Recibo Provisório nº";
+            lbl_IdRecibo.Text = "Recibo nº";
             // 
-            // frm_EmitirReciboProvisorio
+            // lbl_IdReciboProvisorio
+            // 
+            lbl_IdReciboProvisorio.AutoSize = true;
+            lbl_IdReciboProvisorio.Font = new Font("JetBrains Mono Light", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_IdReciboProvisorio.ForeColor = Color.FromArgb(206, 212, 218);
+            lbl_IdReciboProvisorio.Location = new Point(12, 22);
+            lbl_IdReciboProvisorio.Name = "lbl_IdReciboProvisorio";
+            lbl_IdReciboProvisorio.Size = new Size(250, 21);
+            lbl_IdReciboProvisorio.TabIndex = 15;
+            lbl_IdReciboProvisorio.Text = "ID do Recibo Provisório:";
+            // 
+            // txtbox_IdReciboProvisorio
+            // 
+            txtbox_IdReciboProvisorio.AcceptsTab = true;
+            txtbox_IdReciboProvisorio.BackColor = Color.FromArgb(108, 117, 125);
+            txtbox_IdReciboProvisorio.BorderStyle = BorderStyle.None;
+            txtbox_IdReciboProvisorio.Cursor = Cursors.IBeam;
+            txtbox_IdReciboProvisorio.Font = new Font("JetBrains Mono Light", 11F);
+            txtbox_IdReciboProvisorio.ForeColor = Color.FromArgb(222, 226, 230);
+            txtbox_IdReciboProvisorio.Location = new Point(257, 23);
+            txtbox_IdReciboProvisorio.MaxLength = 3;
+            txtbox_IdReciboProvisorio.Name = "txtbox_IdReciboProvisorio";
+            txtbox_IdReciboProvisorio.Size = new Size(74, 20);
+            txtbox_IdReciboProvisorio.TabIndex = 19;
+            txtbox_IdReciboProvisorio.KeyPress += txtbox_IdReciboProvisorio_KeyPress;
+            // 
+            // btn_Vincular
+            // 
+            btn_Vincular.BackColor = Color.FromArgb(52, 58, 64);
+            btn_Vincular.BackgroundImageLayout = ImageLayout.None;
+            btn_Vincular.Cursor = Cursors.Hand;
+            btn_Vincular.FlatAppearance.BorderSize = 0;
+            btn_Vincular.FlatAppearance.MouseDownBackColor = Color.FromArgb(73, 80, 87);
+            btn_Vincular.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 58, 64);
+            btn_Vincular.FlatStyle = FlatStyle.Flat;
+            btn_Vincular.Font = new Font("JetBrains Mono Light", 10F);
+            btn_Vincular.ForeColor = Color.FromArgb(206, 212, 218);
+            btn_Vincular.Location = new Point(339, 17);
+            btn_Vincular.Margin = new Padding(5);
+            btn_Vincular.Name = "btn_Vincular";
+            btn_Vincular.Size = new Size(86, 33);
+            btn_Vincular.TabIndex = 19;
+            btn_Vincular.Text = "VINCULAR";
+            btn_Vincular.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_Vincular.UseVisualStyleBackColor = false;
+            btn_Vincular.Click += btn_Vincular_Click;
+            // 
+            // frm_EmitirReciboDefinitivo
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(73, 80, 87);
             ClientSize = new Size(784, 526);
+            Controls.Add(btn_Vincular);
+            Controls.Add(txtbox_IdReciboProvisorio);
+            Controls.Add(lbl_IdReciboProvisorio);
             Controls.Add(lbl_IdRecibo);
-            Controls.Add(pnl_EmissaoReciboProvisorio);
+            Controls.Add(pnl_EmissaoRecibo);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "frm_EmitirReciboProvisorio";
-            Text = "frm_EmitirReciboProvisorio";
-            Load += frm_EmitirReciboProvisorio_Load;
-            pnl_EmissaoReciboProvisorio.ResumeLayout(false);
-            pnl_EmissaoReciboProvisorio.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_ReciboProvisorioAtos).EndInit();
+            Name = "frm_EmitirReciboDefinitivo";
+            Text = "frm_EmitirReciboDefinitivo";
+            Load += frm_EmitirReciboDefinitivo_Load;
+            pnl_EmissaoRecibo.ResumeLayout(false);
+            pnl_EmissaoRecibo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_ReciboAtos).EndInit();
             ((System.ComponentModel.ISupportInitialize)reciboProvisorioAtoBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Panel pnl_EmissaoReciboProvisorio;
+        private Panel pnl_EmissaoRecibo;
         private Label lbl_Requerente;
         private Label lbl_Cpf;
         private TextBox txtbox_Requerente;
@@ -449,12 +502,15 @@
         private TextBox txtbox_Quantidade;
         private Button btn_Adicionar;
         private Button btn_Salvar;
-        private DataGridView dgv_ReciboProvisorioAtos;
+        private DataGridView dgv_ReciboAtos;
         private Label lbl_IdRecibo;
         private Label lbl_NomeAto;
         private Label lbl_TotalRecibo;
         private Label lbl_ValorQuantidade;
         private Button btn_Excluir;
         private Button btn_Editar;
+        private Label lbl_IdReciboProvisorio;
+        private TextBox txtbox_IdReciboProvisorio;
+        private Button btn_Vincular;
     }
 }

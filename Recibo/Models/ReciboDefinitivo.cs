@@ -31,6 +31,9 @@ public partial class ReciboDefinitivo
     [StringLength(11)]
     public string Cpf { get; set; }
 
+    [NotMapped]
+    public decimal Total => ReciboAtos.Sum(a => a.Total);
+
     [InverseProperty("Recibo")]
     public virtual ICollection<ReciboAto> ReciboAtos { get; set; } = new List<ReciboAto>();
 
