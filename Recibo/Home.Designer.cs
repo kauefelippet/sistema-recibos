@@ -146,6 +146,7 @@
             btn_ReciboDefinitivoConsulta.TextAlign = ContentAlignment.MiddleLeft;
             btn_ReciboDefinitivoConsulta.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_ReciboDefinitivoConsulta.UseVisualStyleBackColor = false;
+            btn_ReciboDefinitivoConsulta.Click += btn_ReciboDefinitivoConsulta_Click;
             // 
             // btn_ReciboDefinitivoRecentes
             // 
@@ -330,7 +331,7 @@
             lbl_Home.Name = "lbl_Home";
             lbl_Home.Size = new Size(784, 62);
             lbl_Home.TabIndex = 0;
-            lbl_Home.Text = "Oficial de Registro Civil das Pessoas Naturais e de Interdições e Tutelas de Itu";
+            lbl_Home.Text = "Oficial de Registro Civil das Pessoas Naturais e de Interdições e Tutelas";
             lbl_Home.TextAlign = ContentAlignment.TopCenter;
             lbl_Home.Click += lbl_Home_Click;
             // 

@@ -27,7 +27,7 @@ namespace Recibo
 
             Application.Run(host.Services.GetRequiredService<Home>());
 
-            ReciboProvisorio reciboProvisorio = new();
+            Models.Recibo reciboProvisorio = new();
             ReciboProvisorioPdfDocument _reciboProvisorioPdfDocument = new(reciboProvisorio);
             _reciboProvisorioPdfDocument.ShowInCompanion();
         }

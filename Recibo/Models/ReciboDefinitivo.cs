@@ -39,5 +39,5 @@ public partial class ReciboDefinitivo
 
     [ForeignKey("ReciboProvisorioId")]
     [InverseProperty("Recibos")]
-    public virtual ReciboProvisorio ReciboProvisorio { get; set; }
+    public virtual Recibo ReciboProvisorio { get; set; }
 }

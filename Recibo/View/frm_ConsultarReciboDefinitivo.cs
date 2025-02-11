@@ -4,62 +4,62 @@ using System.Data;
 
 namespace Recibo.View
 {
-    public partial class frm_ConsultarReciboProvisorio : Form
+    public partial class frm_ConsultarReciboDefinitivo : Form
     {
         private recibos_dbContext _context;
-        private BindingSource ReciboProvisorioBindingSource = new();
-        private BindingSource ReciboProvisorioAtosBindingSource = new();
-        public int ReciboProvisorioId { get; set; }
+        private BindingSource ReciboBindingSource = new();
+        private BindingSource ReciboAtosBindingSource = new();
+        public int ReciboId { get; set; }
 
-        public frm_ConsultarReciboProvisorio(recibos_dbContext context)
+        public frm_ConsultarReciboDefinitivo(recibos_dbContext context)
         {
             InitializeComponent();
             _context = context;
         }
 
-        private void frm_ConsultarReciboProvisorio_Load(object sender, EventArgs e)
+        private void frm_ConsultarReciboDefinitivo_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void BindReciboProvisorioAtosData()
+        private void BindReciboAtosData()
         {
-            var recibosProvisoriosAtos = _context.ReciboProvisorioAtos
-                .Where(r => r.ReciboProvisorioId == this.ReciboProvisorioId)
+            var recibosAtos = _context.ReciboAtos
+                .Where(r => r.ReciboId == this.ReciboId)
                 .Include(r => r.Ato)
                 .ToList();
 
             // Bind the RecibosProvisorios to the DataGridView
-            ReciboProvisorioAtosBindingSource.DataSource = recibosProvisoriosAtos;
-            dgv_RecibosProvisoriosAtos.DataSource = ReciboProvisorioAtosBindingSource;
+            ReciboAtosBindingSource.DataSource = recibosAtos;
+            dgv_RecibosAtos.DataSource = ReciboAtosBindingSource;
 
             // Configure the DataGridView columns
-            dgv_RecibosProvisoriosAtos.AutoGenerateColumns = false;
-            dgv_RecibosProvisoriosAtos.Columns.Clear();
+            dgv_RecibosAtos.AutoGenerateColumns = false;
+            dgv_RecibosAtos.Columns.Clear();
 
             // Add columns for Quantidade, Ato, Descricao, and Total
-            dgv_RecibosProvisoriosAtos.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_RecibosAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Quantidade",
                 HeaderText = "Qtd",
                 Name = "Quantidade"
             });
 
-            dgv_RecibosProvisoriosAtos.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_RecibosAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "AtoNome",
                 HeaderText = "Ato",
                 Name = "AtoNome"
             });
 
-            dgv_RecibosProvisoriosAtos.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_RecibosAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Descricao",
                 HeaderText = "Descrição",
                 Name = "Descricao"
             });
 
-            dgv_RecibosProvisoriosAtos.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_RecibosAtos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Total",
                 HeaderText = "Total",
@@ -67,16 +67,16 @@ namespace Recibo.View
             });
         }
 
-        private void BindReciboProvisorioData()
+        private void BindReciboData()
         {
-            List<Models.Recibo> reciboProvisorio = new();
+            List<ReciboDefinitivo> recibo = new();
 
             // Identify which of the textboxes has been filled
             if (!string.IsNullOrEmpty(txtbox_ID.Text))
             {
                 if (int.TryParse(txtbox_ID.Text, out int id))
                 {
-                    reciboProvisorio = _context.RecibosProvisorios
+                    recibo = _context.Recibos
                         .Where(r => r.Id == id)
                         .ToList();
                 }
@@ -88,7 +88,7 @@ namespace Recibo.View
             }
             else if (!string.IsNullOrEmpty(txtbox_Requerente.Text))
             {
-                reciboProvisorio = _context.RecibosProvisorios
+                recibo = _context.Recibos
                     .Where(r => r.Requerente.Contains(txtbox_Requerente.Text))
                     .ToList();
             }
@@ -97,56 +97,56 @@ namespace Recibo.View
                 // Remove special characters from CPF
                 var cpf = txtbox_CPF.Text.Replace(".", "").Replace("-", "");
 
-                reciboProvisorio = _context.RecibosProvisorios
+                recibo = _context.Recibos
                     .Where(r => r.Cpf.Contains(cpf))
                     .ToList();
             }
             else if (dateTimePicker_Data.Value != DateTime.MinValue)
             {
                 var selectedDate = dateTimePicker_Data.Value.Date;
-                reciboProvisorio = _context.RecibosProvisorios
+                recibo = _context.Recibos
                     .Where(r => r.Data.HasValue && r.Data.Value.Date == selectedDate)
                     .ToList();
             }
 
-            // Bind the RecibosProvisorios to the DataGridView
-            ReciboProvisorioBindingSource.DataSource = reciboProvisorio;
-            dgv_RecibosProvisorios.DataSource = ReciboProvisorioBindingSource;
+            // Bind the Recibos to the DataGridView
+            ReciboBindingSource.DataSource = recibo;
+            dgv_Recibos.DataSource = ReciboBindingSource;
 
             // Configure the DataGridView columns
-            dgv_RecibosProvisorios.AutoGenerateColumns = false;
-            dgv_RecibosProvisorios.Columns.Clear();
+            dgv_Recibos.AutoGenerateColumns = false;
+            dgv_Recibos.Columns.Clear();
 
             // Add columns for Id, Requerente, Cpf, Data, and Total
-            dgv_RecibosProvisorios.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_Recibos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Id",
                 HeaderText = "Id",
                 Name = "Id"
             });
 
-            dgv_RecibosProvisorios.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_Recibos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Requerente",
                 HeaderText = "Requerente",
                 Name = "Requerente"
             });
 
-            dgv_RecibosProvisorios.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_Recibos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Cpf",
                 HeaderText = "CPF",
                 Name = "Cpf"
             });
 
-            dgv_RecibosProvisorios.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_Recibos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Data",
                 HeaderText = "Data",
                 Name = "Data"
             });
 
-            dgv_RecibosProvisorios.Columns.Add(new DataGridViewTextBoxColumn
+            dgv_Recibos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Total",
                 HeaderText = "Total",
@@ -204,21 +204,21 @@ namespace Recibo.View
 
         private void btn_Buscar_Click(object sender, EventArgs e)
         {
-            BindReciboProvisorioData();
+            BindReciboData();
         }
 
-        private void dgv_RecibosProvisorios_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv_Recibos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ensure the row index is valid
             {
                 int selectedRowIndex = e.RowIndex;
-                DataGridViewRow selectedRow = dgv_RecibosProvisorios.Rows[selectedRowIndex];
+                DataGridViewRow selectedRow = dgv_Recibos.Rows[selectedRowIndex];
 
                 // Get the ReciboProvisorioId from the selected row
-                ReciboProvisorioId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
+                ReciboId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
             }
 
-            BindReciboProvisorioAtosData();
+            BindReciboAtosData();
         }
 
         private void dateTimePicker_Data_ValueChanged(object sender, EventArgs e)

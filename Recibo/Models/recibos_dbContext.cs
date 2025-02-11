@@ -26,7 +26,7 @@ public partial class recibos_dbContext : DbContext
 
     public virtual DbSet<ReciboProvisorioAto> ReciboProvisorioAtos { get; set; }
 
-    public virtual DbSet<ReciboProvisorio> RecibosProvisorios { get; set; }
+    public virtual DbSet<Recibo> RecibosProvisorios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql("server=localhost;port=3307;database=recibos_db;uid=root;pwd=secret", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.39-mysql"));
@@ -79,7 +79,7 @@ public partial class recibos_dbContext : DbContext
                 .HasConstraintName("recibo_provisorio_atos_ibfk_1");
         });
 
-        modelBuilder.Entity<ReciboProvisorio>(entity =>
+        modelBuilder.Entity<Recibo>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 

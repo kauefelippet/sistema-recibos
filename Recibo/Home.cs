@@ -134,5 +134,12 @@ namespace Recibo
             var context = _serviceProvider.GetRequiredService<recibos_dbContext>();
             FormShow(new frm_RecentesReciboDefinitivo(context));
         }
+
+        private void btn_ReciboDefinitivoConsulta_Click(object sender, EventArgs e)
+        {
+            ActiveButton(btn_ReciboDefinitivoConsulta);
+            var context = _serviceProvider.GetRequiredService<recibos_dbContext>();
+            FormShow(new frm_ConsultarReciboDefinitivo(context));
+        }
     }
 }
