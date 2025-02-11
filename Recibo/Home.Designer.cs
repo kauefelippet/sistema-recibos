@@ -167,6 +167,7 @@
             btn_ReciboDefinitivoRecentes.TextAlign = ContentAlignment.MiddleLeft;
             btn_ReciboDefinitivoRecentes.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_ReciboDefinitivoRecentes.UseVisualStyleBackColor = false;
+            btn_ReciboDefinitivoRecentes.Click += btn_ReciboDefinitivoRecentes_Click;
             // 
             // lbl_ReciboDefinitivo
             // 

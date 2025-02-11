@@ -36,6 +36,12 @@
     <Compile Update="View\frm_EmitirReciboDefinitivo.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\frm_RecentesReciboDefinitivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\frm_ReciboDefinitivoConsultado.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\frm_ReciboProvisorioConsultado.cs">
       <SubType>Form</SubType>
     </Compile>
