@@ -26,5 +26,17 @@ namespace Recibo.Util
                 document.GeneratePdf(outputPath);
             }
         }
+
+        public void GenerateReciboDefinitivoPdf(int reciboDefinitivoId, string outputPath)
+        {
+            var reciboDefinitivo = _context.Recibos
+                .Include(r => r.ReciboAtos)
+                .FirstOrDefault(r => r.Id == reciboDefinitivoId);
+            if (reciboDefinitivo != null)
+            {
+                var document = new ReciboDefinitivoPdfDocument(reciboDefinitivo);
+                document.GeneratePdf(outputPath);
+            }
+        }
     }
 }

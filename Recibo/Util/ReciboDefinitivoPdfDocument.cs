@@ -5,13 +5,13 @@ using Recibo.Models;
 
 namespace Recibo.Util
 {
-    public class ReciboProvisorioPdfDocument : IDocument
+    public class ReciboDefinitivoPdfDocument : IDocument
     {
-        private readonly ReciboProvisorio _reciboProvisorio;
+        private readonly ReciboDefinitivo _reciboDefinitivo;
 
-        public ReciboProvisorioPdfDocument(ReciboProvisorio reciboProvisorio)
+        public ReciboDefinitivoPdfDocument(ReciboDefinitivo recibo)
         {
-            _reciboProvisorio = reciboProvisorio;
+            _reciboDefinitivo = recibo;
         }
 
         public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
@@ -30,7 +30,7 @@ namespace Recibo.Util
         {
             container.Column(column =>
             {
-                column.Item().Text($"RECIBO PROVISÓRIO Nº {_reciboProvisorio.Id}").AlignRight().FontSize(12).FontFamily("Century Gothic");
+                column.Item().Text($"RECIBO Nº {_reciboDefinitivo.Id}").AlignRight().FontSize(12).FontFamily("Century Gothic");
                 column.Item().Text($"Oficial de Registro Civil das Pessoas Naturais   |   CNPJ: 11.111.111/1111-11").Bold().FontSize(11).AlignCenter().FontFamily("Century Gothic");
                 column.Item().Text($"Rua Tal, 123 - Centro  |  (99) 9999-9999  |  (11) 1111-1111  |  itu@cartorio.org.br").FontSize(11).AlignCenter().FontFamily("Century Gothic");
             });
@@ -45,15 +45,15 @@ namespace Recibo.Util
                     row.RelativeItem().Column(column =>
                     {
                         column.Item().Text("");
-                        column.Item().Text($"Interessado: {_reciboProvisorio.Requerente}").FontSize(10).FontFamily("Century Gothic");
-                        column.Item().Text($"Total: {_reciboProvisorio.Total:C}").FontSize(10).FontFamily("Century Gothic");
+                        column.Item().Text($"Interessado: {_reciboDefinitivo.Requerente}").FontSize(10).FontFamily("Century Gothic");
+                        column.Item().Text($"Total: {_reciboDefinitivo.Total:C}").FontSize(10).FontFamily("Century Gothic");
                     });
 
                     row.RelativeItem().Column(column =>
                     {
                         column.Item().Text("");
                         column.Item().Text("");
-                        column.Item().Text($"Data: {_reciboProvisorio.Data}").AlignRight().FontSize(10).FontFamily("Century Gothic");
+                        column.Item().Text($"Data: {_reciboDefinitivo.Data}").AlignRight().FontSize(10).FontFamily("Century Gothic");
                     });
                 });
 
@@ -64,7 +64,7 @@ namespace Recibo.Util
                         column.Item().Element(ComposeTable);
                 });
 
-                column.Item().AlignRight().Text($"Total de atos praticados: {_reciboProvisorio.ReciboProvisorioAtos.Sum(x => x.Total)}").Bold().AlignCenter().FontSize(10).FontFamily("Century Gothic");
+                column.Item().AlignRight().Text($"Total de atos praticados: {_reciboDefinitivo.ReciboAtos.Sum(x => x.Total)}").Bold().AlignCenter().FontSize(10).FontFamily("Century Gothic");
                 column.Item().Text("");
                 column.Item().Text("");
                 column.Item().Text("");
@@ -105,7 +105,7 @@ namespace Recibo.Util
                     }
                 });
 
-                foreach (var ato in _reciboProvisorio.ReciboProvisorioAtos)
+                foreach (var ato in _reciboDefinitivo.ReciboAtos)
                 {
                     table.Cell().Element(CellStyling).Text($"{ato.Quantidade}");
                     table.Cell().Element(CellStyling).Text($"{ato.AtoNome}");

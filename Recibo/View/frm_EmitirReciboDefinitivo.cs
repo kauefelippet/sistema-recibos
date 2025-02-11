@@ -128,7 +128,7 @@ namespace Recibo.View
                 int reciboId = _context.Recibos.OrderByDescending(r => r.Id).FirstOrDefault().Id;
                 string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"ReciboDefinitivo_{reciboId}.pdf");
 
-                // _pdfService.GenerateReciboDefinitivoPdf(reciboId, outputPath); TODO: Implement this method
+                _pdfService.GenerateReciboDefinitivoPdf(reciboId, outputPath);
 
                 MessageBox.Show("PDF gerado com sucesso!", "Emissão bem sucedida", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
