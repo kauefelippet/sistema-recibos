@@ -52,27 +52,77 @@ Update the connection string in `Program.cs` to match your MySQL server configur
 3.	**Run the application:**
 Open the solution in Visual Studio 2022 and run the project.
 
+## Database Schema
+``` mysql
+USE recibos_db;
+
+CREATE TABLE atos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    codigo CHAR(3) NOT NULL UNIQUE,
+    custas_oficial DECIMAL(10, 2) NOT NULL,
+    custas_iss DECIMAL(10, 2) NOT NULL,
+    custas_ipesp DECIMAL(10, 2) NOT NULL,
+    nome VARCHAR(63) NOT NULL
+);
+
+CREATE TABLE recibos_provisorios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    requerente VARCHAR(255) NOT NULL,
+    cpf CHAR(11)
+);
+
+CREATE TABLE recibo_provisorio_atos (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    recibo_provisorio_id INT,
+    ato_id INT,
+    descricao VARCHAR(127),
+    quantidade INT NOT NULL,
+    FOREIGN KEY (recibo_provisorio_id) REFERENCES recibos_provisorios(id) ON DELETE CASCADE,
+    FOREIGN KEY (ato_id) REFERENCES atos(id) ON DELETE CASCADE
+);
+
+CREATE TABLE recibos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    requerente VARCHAR(255) NOT NULL,
+    cpf CHAR(11),
+    recibo_provisorio_id INT NULL,
+    FOREIGN KEY (recibo_provisorio_id) REFERENCES recibos_provisorios(id)
+);
+
+CREATE TABLE recibo_atos (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	recibo_id INT,
+    ato_id INT,
+    descricao VARCHAR(127),
+    quantidade INT NOT NULL,
+    FOREIGN KEY (recibo_id) REFERENCES recibos(id) ON DELETE CASCADE,
+    FOREIGN KEY (ato_id) REFERENCES atos(id) ON DELETE CASCADE
+);
+```
+
 ## Contributing
 Contributions are welcome! Fork the repository and submit pull requests for any improvements or bug fixes.
 
 ## License
 This project is licensed under the MIT License.
 
-## Sistema de Emiss„o e Gerenciamento de Recibos
+## Sistema de Emiss√£o e Gerenciamento de Recibos
 
 ![C# Badge](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
 ![.Net Badge](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
 ![MySQL Badge](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=fff&style=for-the-badge)
 ![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=for-the-badge)
 
-Este projeto È um Sistema de Emiss„o e Gerenciamento de Recibos desenvolvido considerando um caso real no Registro Civil de Itu. Ele visa simplificar e tornar o trabalho mais eficiente, implementando necessidades atualizadas para gerenciar e gerar recibos em ambas as formas provisÛrias e definitivas.
+Este projeto √© um Sistema de Emiss√£o e Gerenciamento de Recibos desenvolvido considerando um caso real no Registro Civil de Itu. Ele visa simplificar e tornar o trabalho mais eficiente, implementando necessidades atualizadas para gerenciar e gerar recibos em ambas as formas provis√≥rias e definitivas.
 
 ## Funcionalidades
-- **Emiss„o de Recibos ProvisÛrios** 
-- **Emiss„o de Recibos Definitivos**
-- **GeraÁ„o de PDF:** Gere documentos PDF para ambos os recibos provisÛrios e definitivos usando QuestPDF.
-- **Binding de Dados:** Vincule dados a formul·rios para f·cil gerenciamento e exibiÁ„o.
-- **IntegraÁ„o com Banco de Dados:** Utilize o banco de dados MySQL para armazenar e recuperar dados de recibos.
+- **Emiss√£o de Recibos Provis√≥rios** 
+- **Emiss√£o de Recibos Definitivos**
+- **Gera√ß√£o de PDF:** Gere documentos PDF para ambos os recibos provis√≥rios e definitivos usando QuestPDF.
+- **Binding de Dados:** Vincule dados a formul√°rios para f√°cil gerenciamento e exibi√ß√£o.
+- **Integra√ß√£o com Banco de Dados:** Utilize o banco de dados MySQL para armazenar e recuperar dados de recibos.
 
 ## Tecnologias Utilizadas
 - .NET 8
@@ -84,38 +134,88 @@ Este projeto È um Sistema de Emiss„o e Gerenciamento de Recibos desenvolvido con
 
 # Estrutura do Projeto
 - **Recibo:** Pasta principal do projeto.
-- **Models:** ContÈm os modelos de dados para a aplicaÁ„o.
-- **Util:** ContÈm classes utilit·rias, incluindo a geraÁ„o de documentos PDF.
-- **View:** ContÈm os Windows Forms para a aplicaÁ„o.
-- **ViewModel:** ContÈm as classes ViewModel para gerenciar os dados e a lÛgica de negÛcios.
-- **Program.cs:** Ponto de entrada da aplicaÁ„o.
-- **Recibo.csproj:** Arquivo contendo dependÍncias e configuraÁıes de compilaÁ„o.
+- **Models:** Cont√©m os modelos de dados para a aplica√ß√£o.
+- **Util:** Cont√©m classes utilit√°rias, incluindo a gera√ß√£o de documentos PDF.
+- **View:** Cont√©m os Windows Forms para a aplica√ß√£o.
+- **ViewModel:** Cont√©m as classes ViewModel para gerenciar os dados e a l√≥gica de neg√≥cios.
+- **Program.cs:** Ponto de entrada da aplica√ß√£o.
+- **Recibo.csproj:** Arquivo contendo depend√™ncias e configura√ß√µes de compila√ß√£o.
 
-## UtilizaÁ„o
+## Utiliza√ß√£o
 
-### PrÈ-requisitos
+### Pr√©-requisitos
 - Visual Studio 2022
 - SDK .NET 8
 - Servidor MySQL ou container Docker equivalente
 
-### ConfiguraÁ„o
-1. **Clone o repositÛrio:**
+### Configura√ß√£o
+1. **Clone o reposit√≥rio:**
 ```bash
 git clone https://github.com/kauefelippet/sistema-recibos.git
 cd recibo-management-system
 ```
 
-2. **Configure a conex„o com o banco de dados:**
-Atualize a string de conex„o no arquivo Program.cs para corresponder ‡ sua configuraÁ„o do MySQL:
+2. **Configure a conex√£o com o banco de dados:**
+Atualize a string de conex√£o no arquivo Program.cs para corresponder √† sua configura√ß√£o do MySQL:
 ```csharp
 options.UseMySql("server=localhost;port=3307;database=recibos_db;uid=root;pwd=secret", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.39-mysql"));
 ```
 
-3. **Execute a aplicaÁ„o:**
-Abra a soluÁ„o no Visual Studio 2022 e execute o projeto.
+3. **Execute a aplica√ß√£o:**
+Abra a solu√ß√£o no Visual Studio 2022 e execute o projeto.
 
-## ContribuiÁ„o
-ContribuiÁıes s„o bem-vindas! FaÁa um fork do repositÛrio e envie uma pull request para qualquer melhoria ou correÁ„o de bugs.
+## Esquema do Banco de Dados
+``` mysql
+USE recibos_db;
 
-## LicenÁa
-Este projeto est· licenciado sob a LicenÁa MIT. 
+CREATE TABLE atos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    codigo CHAR(3) NOT NULL UNIQUE,
+    custas_oficial DECIMAL(10, 2) NOT NULL,
+    custas_iss DECIMAL(10, 2) NOT NULL,
+    custas_ipesp DECIMAL(10, 2) NOT NULL,
+    nome VARCHAR(63) NOT NULL
+);
+
+CREATE TABLE recibos_provisorios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    requerente VARCHAR(255) NOT NULL,
+    cpf CHAR(11)
+);
+
+CREATE TABLE recibo_provisorio_atos (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    recibo_provisorio_id INT,
+    ato_id INT,
+    descricao VARCHAR(127),
+    quantidade INT NOT NULL,
+    FOREIGN KEY (recibo_provisorio_id) REFERENCES recibos_provisorios(id) ON DELETE CASCADE,
+    FOREIGN KEY (ato_id) REFERENCES atos(id) ON DELETE CASCADE
+);
+
+CREATE TABLE recibos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    requerente VARCHAR(255) NOT NULL,
+    cpf CHAR(11),
+    recibo_provisorio_id INT NULL,
+    FOREIGN KEY (recibo_provisorio_id) REFERENCES recibos_provisorios(id)
+);
+
+CREATE TABLE recibo_atos (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	recibo_id INT,
+    ato_id INT,
+    descricao VARCHAR(127),
+    quantidade INT NOT NULL,
+    FOREIGN KEY (recibo_id) REFERENCES recibos(id) ON DELETE CASCADE,
+    FOREIGN KEY (ato_id) REFERENCES atos(id) ON DELETE CASCADE
+);
+```
+
+## Contribui√ß√£o
+Contribui√ß√µes s√£o bem-vindas! Fa√ßa um fork do reposit√≥rio e envie uma pull request para qualquer melhoria ou corre√ß√£o de bugs.
+
+## Licen√ßa
+Este projeto est√° licenciado sob a Licen√ßa MIT. 
